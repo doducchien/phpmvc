@@ -1,0 +1,86 @@
+
+.login{
+    width: 100%;
+    height: 100%;
+    background-image: url("../assets/img/login/bk.jpg");
+    position: fixed;
+}
+
+.login .err-login{
+    position: fixed;
+    width: 650px !important;
+    height: 60px !important;
+    background-color: rgb(187, 80, 80) !important;
+    color: white !important;
+    line-height: 60px;
+    text-align: center;
+    left: 10px;
+    top: 10px;
+    border-radius:  30px;
+    cursor: pointer;
+    font-size: 20px;
+}
+.login .frame-login{
+    margin: auto;
+    margin-top: 150px;
+    width: 500px;
+    height: auto;
+    background-color: rgba(255, 255, 255, 0.5);
+    padding: 25px;
+}
+
+.login .frame-login > img{
+    display: block;
+    margin: auto;
+    width: 100px;
+
+}
+
+.login .frame-login > form{
+    width: 100%;
+    height: auto;
+} 
+.login .frame-login > form input{
+    width: 100%;
+    height: 50px;
+    display: block;
+    margin-top: 30px;
+    padding: 10px;
+}
+
+.login .frame-login > form button{
+    display: block;
+    margin: auto;
+    margin-top: 30px;
+    background-color: red;
+    width: 120px;
+    height: 50px;
+    color: white;
+    border: none;
+    transition: 0.4s;
+    cursor: pointer;
+    padding: 10px;
+
+}
+.login .frame-login > form button:active{
+    outline: 0;
+    outline-style: none;
+    outline-width: 0;
+}
+.login .frame-login > form button:hover{
+    font-size: 20px;
+}
+
+.login .frame-login > a{
+    text-decoration: none;
+    display: block;
+    margin: auto;
+    margin-top: 30px;
+    width: 400px;
+    height: 30px;
+    text-align: center;
+    color: rgb(2, 0, 128);
+  
+    font-size: 20px;
+    font-weight: 500;
+}

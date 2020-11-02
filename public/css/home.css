@@ -1,0 +1,30 @@
+.home{
+    width: 100%;
+    height: 100%;
+}
+.home-header{
+    width: 100%;
+    height: 60px;
+    
+}
+
+.home-content{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+    width: 100%;
+    height: calc(100% - 70px);
+    
+}
+
+.home-content .notifica{
+    height: 100%;
+    width: 500px;
+ 
+}
+
+.home-content .list-group{
+    height: 100%;
+    width: calc(100% - 510px);
+
+}

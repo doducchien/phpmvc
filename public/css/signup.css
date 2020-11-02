@@ -1,0 +1,122 @@
+
+.signup{
+    width: 100%;
+    height: 100%;
+    background-image: url("../assets/img/signup/bk.jpg");
+    position: fixed;
+}
+.signup .err-signup{
+    position: fixed;
+    width: 650px !important;
+    height: 60px !important;
+    background-color: rgb(187, 80, 80) !important;
+    color: white !important;
+    line-height: 60px;
+    text-align: center;
+    left: 10px;
+    top: 10px;
+    border-radius:  30px;
+    cursor: pointer;
+}
+.signup .samepass{
+    position: fixed;
+    left: 10px;
+    top: 10px;
+    width: 650px !important;
+    height: 60px !important;
+    background-color: rgb(187, 80, 80) !important;
+    color: white !important;
+    line-height: 60px;
+    text-align: center;
+    border-radius:  30px;
+    cursor: pointer;
+}
+.signup .done-samepass{
+    position: fixed;
+    left: 10px;
+    top: 10px;
+    width: 650px !important;
+    height: 60px !important;
+    background-color: rgb(55, 126, 14) !important;
+    color: white !important;
+    line-height: 60px;
+    text-align: center;
+    border-radius:  30px;
+    cursor: pointer;
+}
+.signup .success-signup{
+    width: 650px !important;
+    height: 60px !important;
+    background-color: rgb(55, 126, 14) !important;
+    color: white !important;
+    line-height: 60px;
+    text-align: center;
+    margin-left: 10px;
+    margin-top: 10px;
+    border-radius:  30px;
+    cursor: pointer;
+}
+.signup .frame-signup{
+    margin: auto;
+    margin-top: 50px;
+    width: 500px;
+    height: auto;
+    background-color: rgba(255, 255, 255, 0.5);
+    padding: 25px;
+}
+
+.signup .frame-signup > img{
+    display: block;
+    margin: auto;
+    width: 100px;
+
+}
+
+.signup .frame-signup > form{
+    width: 100%;
+    height: auto;
+} 
+.signup .frame-signup > form input{
+    width: 100%;
+    height: 50px;
+    display: block;
+    margin-top: 30px;
+    padding: 10px;
+}
+
+.signup .frame-signup > form button{
+    display: block;
+    margin: auto;
+    margin-top: 30px;
+    background-color: red;
+    width: 120px;
+    height: 50px;
+    color: white;
+    border: none;
+    transition: 0.4s;
+    cursor: pointer;
+    padding: 10px;
+
+}
+.signup .frame-signup > form button:active{
+    outline: 0;
+    outline-style: none;
+    outline-width: 0;
+}
+.signup .frame-signup > form button:hover{
+    font-size: 20px;
+}
+
+.signup .frame-signup > a{
+    text-decoration: none;
+    display: block;
+    margin: auto;
+    margin-top: 30px;
+    width: 400px;
+    height: 30px;
+    text-align: center;
+    color: rgb(2, 0, 128);
+  
+    font-size: 20px;
+    font-weight: 500;
+}
