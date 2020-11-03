@@ -2,11 +2,7 @@
     width: 100%;
     height: 100%;
 }
-.home-header{
-    width: 100%;
-    height: 60px;
-    
-}
+
 
 .home-content{
     display: flex;
@@ -18,13 +14,17 @@
 }
 
 .home-content .notifica{
-    height: 100%;
+    margin-top: 35px;
+    height: calc(100% - 40px);
     width: 500px;
- 
+    border: 1px solid gray;
+    overflow: auto;
 }
 
 .home-content .list-group{
-    height: 100%;
+    margin-top: 35px;
+    height: calc(100% - 40px);
     width: calc(100% - 510px);
+    border: 1px solid gray;
 
 }
