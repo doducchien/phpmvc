@@ -7,7 +7,7 @@
 .home-content{
     display: flex;
     justify-content: space-between;
-    margin-top: 10px;
+    /* margin-top: 20px; */
     width: 100%;
     height: calc(100% - 70px);
     
@@ -15,7 +15,7 @@
 
 .home-content .notifica{
     margin-top: 35px;
-    height: calc(100% - 40px);
+    height: calc(100% - 20px);
     width: 500px;
     border: 1px solid gray;
     overflow: auto;
@@ -23,8 +23,10 @@
 
 .home-content .list-group{
     margin-top: 35px;
-    height: calc(100% - 40px);
+    height: calc(100% - 20px);
     width: calc(100% - 510px);
     border: 1px solid gray;
-
+    padding: 2px;
+    overflow-y: auto;
+    display: table
 }

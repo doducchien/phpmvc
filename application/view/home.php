@@ -25,6 +25,9 @@ if(!isset($_SESSION['email'])){
     <title>Home</title>
     <link rel="stylesheet" href="public/css/init.css">
     <link rel="stylesheet" href="public/css/home.css">
+    <link rel="stylesheet" href="public/css/header.css">
+    <link rel="stylesheet" href="public/css/listGroup.css">
+    
 </head>
 <body>
     <div class="home">
@@ -35,12 +38,14 @@ if(!isset($_SESSION['email'])){
 
         <div class="home-content">
             <div class="notifica">
-            <?php include ("notifica.php")?>
+                <?php include ("notifica.php")?>
             </div>
-            <div class="list-group">
-
+            <div id='list-group' class="list-group">
+                <?php include ("listGroup.php") ?>
             </div>
         </div>
     </div>
+    <script src="public/js/home.js"></script>
+    <script src="public/js/listGroup.js"></script>
 </body>
 </html>

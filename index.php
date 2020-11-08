@@ -62,7 +62,18 @@ else if(count($_POST) != 0){
     }
 }
 else if(count($_GET) != 0){
-    
+    if(isset($_GET['listgroup'])){
+        $controller = 'Listgroup_Controller';
+        $action = 'listgroupAction';
+        $helper = 'listgroup_helper';
+        $model = 'Listgroup';
+
+        require PATH_APP . DS . 'controller' . DS . $controller . '.php';
+        $controllerObj = new $controller($model, $view, $helper, $action);
+        $result = $controllerObj->{$action}();
+        echo json_encode($result, JSON_UNESCAPED_UNICODE);
+
+    }
 }
 
 ?>

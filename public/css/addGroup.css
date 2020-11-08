@@ -1,0 +1,33 @@
+.addGroup{
+    width: 100%;
+    height: 100%;
+}
+
+.addGroup .addGroup-content{
+    margin-top: 30px;
+}
+.addGroup .addGroup-content form{
+    width: 350px;
+    height: auto;
+    margin: auto;
+    margin-top: 100px;
+    padding: 20px;
+    background-color: antiquewhite;
+    /* text-align: center; */
+}
+.addGroup .addGroup-content form input{
+    display: block;
+    width: 100%;
+    margin-bottom: 20px;
+    height: 30px;
+    padding: 5px;
+    border: none;
+}
+
+.addGroup .addGroup-content form button{
+    display: block;
+    width: 100px;
+    height: 30px;
+    line-height: 30px;
+    margin: auto;
+}
