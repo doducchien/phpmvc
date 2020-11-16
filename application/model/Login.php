@@ -22,7 +22,8 @@ class Login{
         $stmt->bind_result($emailValue, $fullnameValue);
       
         $stmt->fetch();
-
+        $stmt->close();
+        $conn->close();
         return array('email'=>$emailValue,'fullname'=>$fullnameValue);
 
         

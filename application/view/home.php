@@ -47,5 +47,6 @@ if(!isset($_SESSION['email'])){
     </div>
     <script src="public/js/home.js"></script>
     <script src="public/js/listGroup.js"></script>
+    <script src="public/js/header.js"></script>
 </body>
 </html>

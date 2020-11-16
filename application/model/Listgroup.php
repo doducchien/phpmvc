@@ -10,17 +10,19 @@
             $e = $_SESSION['email'];
             
             $stmt->execute();
-            include_once PATH_APP . DS . 'model' . DS . 'Group.php';
+            include_once PATH_APP . DS . 'model' . DS . 'InfoGroup.php';
             
             $i = 0;
             $stmt->bind_result($idGroup, $nameGroup, $creator);
             while($stmt->fetch()){
-                $group = new Group();
+                $group = new InfoGroup();
                 $group->idGroup =$idGroup;
                 $group->nameGroup = $nameGroup;
                 $group->creator = $creator;
                 array_push($this->result, $group);
             }
+            $stmt->close();
+            $conn->close();
 
             return $this->result;
         

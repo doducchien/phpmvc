@@ -74,6 +74,18 @@ else if(count($_GET) != 0){
         echo json_encode($result, JSON_UNESCAPED_UNICODE);
 
     }
+    else if(isset($_GET['idGroup'])){
+        $controller = 'Group_Controller';
+        $action = 'groupAction';
+        $helper = 'group_helper';
+        $model = 'Group';
+
+        require PATH_APP . DS . 'controller' . DS . $controller . '.php';
+        $controllerObj = new $controller($model, $view, $helper, $action, $_GET['idGroup']);
+        // $result = $controllerObj->{$action}();
+        $controllerObj->{$action}();
+        // echo json_encode($result, JSON_UNESCAPED_UNICODE);
+    }
 }
 
 ?>
