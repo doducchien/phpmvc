@@ -19,17 +19,6 @@ xhttp.send();
 
 
 function getGroup($idGroup){
-    // var xhttp1 = new XMLHttpRequest();
-    // xhttp1.onreadystatechange = function(){
-    //     if(this.readyState == 4 || this.readyState == 200){
-    //         data = JSON.parse(this.response);
-            
-    //     }
-        
-    // }
-    // xhttp1.open('GET', `index.php?idGroup=${$idGroup}`, true);
-    // xhttp1.send();
-
     window.location=`index.php?idGroup=${$idGroup}`;
 
 }
@@ -38,7 +27,6 @@ document.getElementById('btn-search').disabled = true;
 
 function controlDisable(val){
     var btnSearch = document.getElementById('btn-search');
-    console.log(val)
     if(val === ''){
         btnSearch.disabled = true;
     }
@@ -46,9 +34,33 @@ function controlDisable(val){
 }
 
 function showGroup(){
-    var showGroup = document.getElementById('show-group');
-    var idGroup = document.getElementById('idGroup').value.trim();
-    showGroup.style.display= 'block';
+    let showGroup = document.getElementById('show-group');
+    let xhttp = new XMLHttpRequest();
+    var searchGroup = document.getElementById('idGroup').value.trim();
+    xhttp.onreadystatechange = function(){
+        if(this.readyState === 4 || this.readyState === 200){
+            let data = JSON.parse(this.response);
+            let name = document.getElementById('name');
+            let id = document.getElementById('id');
+            let creator = document.getElementById('creator');
+            let count = document.getElementById('count');
+            let btn = document.getElementById('btn');
+
+            name.innerHTML= data[0].nameGroup;
+            id.innerHTML = data[0].idGroup;
+            creator.innerHTML = data[0].fullname;
+            count.innerHTML = 'Nhóm có tất cả ' + data[1] + ' thành viên';
+            btn.innerHTML = data[2] != null ? 'Rời khỏi nhóm' : 'Tham gia';
+            showGroup.style.display= 'block';
+        }
+        else{
+            
+        }
+    }
+    
+    xhttp.open('GET', `index.php?searchGroup=${searchGroup}`);
+    xhttp.send();
+    
 }
 function closeGroup(){
     var showGroup = document.getElementById('show-group');

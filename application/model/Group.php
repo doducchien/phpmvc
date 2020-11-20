@@ -38,6 +38,24 @@ class Group{
             return $result;
 
         }
+    public function isJoin($idG){
+        require_once PATH_SYSTEM  . DS . 'config' . DS . 'config.php';
+
+        $conn = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
+
+        if(!$conn) die('kết nối thất bại');
+
+        $query = 'SELECT * FROM member WHERE email = ? AND id_group = ?';
+        $stmt = $conn->prepare($query);
+        $stmt->bind_param('ss', $e, $idGroup);
+        $e = $_SESSION['email'];
+        $idGroup = $idG;
+        $stmt->execute();
+        $stmt->bind_result($email, $id_group);
+        $stmt->fetch();
+        return $email;
+        
+    }
 
 }
 ?>

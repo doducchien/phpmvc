@@ -30,25 +30,26 @@
                         }
                     
                     ?>
-                    
-                    <!-- <li><img src="public/assets/icon/group/user.png"><span> Đỗ Đức Chiến</span></li>
-                    <li><img src="public/assets/icon/group/user.png"><span> Đỗ Đức Chiến</span></li>
-                    <li><img src="public/assets/icon/group/user.png"><span> Đỗ Đức Chiến</span></li>
-                    <li><img src="public/assets/icon/group/user.png"><span> Đỗ Đức Chiến</span></li>
-                    <li><img src="public/assets/icon/group/user.png"><span> Đỗ Đức Chiến</span></li>
-                    <li><img src="public/assets/icon/group/user.png"><span> Đỗ Đức Chiến</span></li>
-                    <li><img src="public/assets/icon/group/user.png"><span> Đỗ Đức Chiến</span></li>
-                    <li><img src="public/assets/icon/group/user.png"><span> Đỗ Đức Chiến</span></li>
-                    <li><img src="public/assets/icon/group/user.png"><span> Đỗ Đức Chiến</span></li>
-                    <li><img src="public/assets/icon/group/user.png"><span> Đỗ Đức Chiến</span></li>
-                    <li><img src="public/assets/icon/group/user.png"><span> Đỗ Đức Chiến</span></li> -->
 
                 </ul>
 
             </div>
-            <div class="right"></div>
+            <div class="right">
+                <div class="control">
+                        <button class='post'>Thảo luận</button>
+                        <button class='doc'>Tài liệu</button>
+                        <button class='homework'>Bài tập về nhà</button>
+                </div>
+                <div class="content">
+                    <div class="post-content">
+
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
     <script src="public/js/group.js"></script>
+    <script src="public/js/header.js"></script>
+
 </body>
 </html>

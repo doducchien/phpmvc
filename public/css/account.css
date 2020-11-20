@@ -1,0 +1,111 @@
+.account{
+    width: 100%;
+    height: 100%;
+}
+.account-content{
+    width: 100%;
+    height: calc(100% - 85px);
+    margin-top: 30px;
+    display: flex;
+    display: flex;
+    justify-content: space-between;
+
+}
+
+.account-content .organization{
+    height: 100%;
+    width: 25%;
+    box-shadow: 0 10px 20px -10px rgba(0, 0, 0, 0.42), 0 4px 25px 0px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    
+}
+.account-content .organization h2{
+    margin-top: 10px;
+}
+.account-content .organization .logo-organization{
+    margin-top: 10px;
+}
+.account-content .organization .id{
+    height: 32px;
+    margin-top: 10px;
+}
+.account-content .organization .id img{
+    
+    height: 20px;
+    margin: 0;
+    border: 0;
+}
+.account-content .organization .id p{
+    font-size: 20px;
+    display: inline-block;
+    height: 32px;
+    width: fit-content;
+}
+
+.account-content .acc-detail{
+    width: calc(75% - 10px);
+    height: 100%;
+}
+
+.account-content .acc-detail form{
+    display: block;
+    width: 500px;
+    height: 600px;
+    margin: auto;
+    margin-top: 10px;
+    border: 1px solid blue;
+}
+.account-content .acc-detail form img{
+    display: block;
+    margin: auto;
+}
+.account-content .acc-detail form div{
+    margin: auto;
+    width: 80%;
+    height: 40px;
+    margin-top: 30px;
+    position: relative;
+}
+.account-content .acc-detail form div input{
+    width: 100%;
+    height: 100%;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    background-color: white;
+    border-bottom: 1px solid black;
+    padding-left: 37px;
+    
+}
+.account-content .acc-detail form div img{
+    position: absolute;
+    left: 0;
+    top: 5px;
+    left: 1px;
+}
+
+.account-content .acc-detail form .btn{
+    margin-top: 60px;
+    display: flex;
+    justify-content: space-around;
+}
+.account-content .acc-detail form .btn button{
+    width: 100px;
+    height: 40px;
+    border: none;
+    cursor: pointer;
+    color: white;
+}
+.account-content .acc-detail form .btn .repair{
+    background-color: dimgray;
+}
+.account-content .acc-detail form .btn .confirm{
+    background-color: #dc3545;
+}
+
+.border-top-left-right{
+    border-top: 1px solid black !important;
+    border-left: 1px solid black !important;
+    border-right: 1px solid black !important;
+
+}

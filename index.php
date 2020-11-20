@@ -60,6 +60,21 @@ else if(count($_POST) != 0){
 
         
     }
+    else if(isset($_POST['confirm'])){
+        $controller = 'Account_Controller';
+        $action = 'updateAccountAction';
+        $helper = 'account_helper';
+        $model = 'Account';
+        require PATH_APP . DS . 'controller' . DS . $controller . '.php';
+        $controllerObj = new $controller($model, $view, $helper, $action, $_POST['email']);
+        $result = $controllerObj->{$action}($_POST['email'], $_POST['fullname'],intval($_POST['age']));
+        if($result){
+            header('Location:' . DS . 'phpmvc' . DS . 'index.php?=account=' . DS . $_POST['email']);
+        }
+        else{
+            echo 'NONONo';
+        }
+    }
 }
 else if(count($_GET) != 0){
     if(isset($_GET['listgroup'])){
@@ -85,6 +100,35 @@ else if(count($_GET) != 0){
         // $result = $controllerObj->{$action}();
         $controllerObj->{$action}();
         // echo json_encode($result, JSON_UNESCAPED_UNICODE);
+    }
+    else if(isset($_GET['searchGroup'])){
+        $controller = 'SearchGroup_Controller';
+        $action = 'searchGroupAction';
+        $helper = 'searchGroup_helper';
+        $model = 'SearchGroup';
+        require PATH_APP . DS . 'controller' . DS . $controller . '.php';
+        $controllerObj = new $controller($model, $view, $helper, $action, $_GET['searchGroup']);
+        $result = $controllerObj->{$action}();
+        echo json_encode($result, JSON_UNESCAPED_UNICODE);
+
+    }
+    else if(isset($_GET['account'])){
+        $controller = 'Account_Controller';
+        $action = 'accountAction';
+        $helper = 'account_helper';
+        $model = 'Account';
+        require PATH_APP . DS . 'controller' . DS . $controller . '.php';
+        $controllerObj = new $controller($model, $view, $helper, $action, $_GET['account']);
+        $result = $controllerObj->{$action}();
+
+        
+    }
+    else if(isset($_GET['logout'])){
+        unset($_SESSION['email']);
+        setcookie("email", "",time() -10000000);
+        setcookie("pass", "", time() -10000000);
+        header('Location:' . DS . 'phpmvc' . DS . 'index.php');
+
     }
 }
 

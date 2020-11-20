@@ -100,3 +100,28 @@
 .group .group-content .left .member-title span{
     font-size: 20px;
 }
+
+.group .group-content .right .control{
+    width: 100%;
+    height: auto;
+}
+
+.group .group-content .right .control button{
+    width: 100px;
+    height: 25px;
+    margin: 10px;
+    cursor: pointer;
+    border: none;
+    color: white;
+}
+.group .group-content .right .control .post{
+    background-color: #dc3545;
+}
+.group .group-content .right .control .doc{
+    background-color: #17a2b8;
+}
+.group .group-content .right .control .homework{
+    background-color: #28a745;
+}
+
+
