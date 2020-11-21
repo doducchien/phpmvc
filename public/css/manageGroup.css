@@ -1,0 +1,63 @@
+.manage-group{
+    width: 100%;
+    height: 100%;
+}
+
+.manage-group-content{
+    width: 100%;
+    height: calc(100% - 85px);
+    border: 1px solid gray;
+    margin-top: 30px;
+    padding: 2px;
+}
+.manage-group-content .gr-btn{
+    width: 100%;
+    height: 40px;
+}
+.manage-group-content .gr-btn button{
+    width: 160px;
+    height: 100%;
+    border: none;
+    cursor: pointer;
+    color: white;
+}
+.manage-group-content .gr-btn .is-created{
+    background-color: #dc3545;
+}
+.manage-group-content .gr-btn .new-group{
+    background-color: #17a2b8;
+}
+.manage-group-content .table-group{
+    width: 800px;
+    margin: auto;
+}
+
+table, tr, th, td{
+    border: 1px solid blue;
+    border-collapse: collapse;
+}
+th, td{
+    width: 200px;
+    text-align: center;
+}
+tr, caption{
+    height: 30px;
+}
+.manage-group-content .table-group table .action{
+    display: flex;
+    justify-content: space-around;
+    border: none;
+    padding-left:50px;
+    padding-right:50px
+}
+.manage-group-content .table-group table .action img{
+    cursor: pointer;
+    padding: 2px;
+    padding-left: 10px;
+    padding-right: 10px;
+    transition: 0.4s;
+}
+.manage-group-content .table-group table .action img:hover{
+    background-color: rgb(180, 175, 175);
+    
+}

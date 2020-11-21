@@ -11,7 +11,7 @@
     </div>
     <ul class="menu">
         <li><a href="">Trang chủ</a> </li>
-        <li><a href="application/view/addGroup.php">Thêm nhóm</a> </li>
+        <li><a href="application/view/manageGroup.php">Quản lý nhóm</a> </li>
         <li><a href="">Tài liệu</a></li>
             
         <li><a href="">Liên hệ</a></li>

@@ -1,5 +1,4 @@
 .header{
-    
     width: 100%;
     height: 50px;
     background-color: teal;
@@ -16,7 +15,7 @@
 }
 .header .menu{
     
-    width: 700px;
+    width: 900px;
     height: 100%;
     display: flex;
     justify-content: space-between;
@@ -25,6 +24,7 @@
     height: 100%;
     width: 600px;
     line-height: 50px;
+    /* min-width: 400px; */
 
 }
 .header .input form{
@@ -50,7 +50,7 @@
 .header .menu li{
     list-style: none;
     display: inline-block;
-    width: 150px;
+    width: 250px;
     height: 100%;
     text-align: center;
     line-height: 50px;

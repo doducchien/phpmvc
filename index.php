@@ -130,6 +130,19 @@ else if(count($_GET) != 0){
         header('Location:' . DS . 'phpmvc' . DS . 'index.php');
 
     }
+    else if(isset($_GET['manage-group'])){
+        $email = $_GET['manage-group'];
+
+        $controller = 'ManageGroup_Controller';
+        $action = 'manageGroupAction';
+        $helper = 'manageGroup_helper';
+        $model = 'ManageGroup';
+        
+        require PATH_APP . DS . 'controller' . DS . $controller . '.php';
+        $controllerObj = new $controller($model, $view, $helper, $action, $email);
+        $result = $controllerObj->{$action}();
+        echo json_encode($result, JSON_UNESCAPED_UNICODE);
+    }
 }
 
 ?>
