@@ -57,5 +57,9 @@ class Group{
         
     }
 
+    public function createGroupAction($idGroup, $nameGroup, $email){
+        return $idGroup;
+    }
+
 }
 ?>

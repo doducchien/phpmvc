@@ -37,27 +37,34 @@ if(!isset($_SESSION['email'])){
         <?php include ("header.php")?>
 
         <div class="manage-group-content">
-            <div class="gr-btn">
-                <button class='is-created'>Nhóm đã được tạo</button>
-                <button class='new-group'>Tạo nhóm mới</button>
+            <div class="create-group">
+                <div class="gr-btn">
+                    <button onClick='openCreateForm()' class='new-group'>Tạo nhóm mới</button>
+                </div>
+                <div class="form-create">
+                    <h2>Tạo nhóm</h2>
+                    <form>
+                        <input require onkeyup="toggleBtnCreate()" id='idGroupCreate' name='idGroupCreate'  type="text" placeholder='Nhập id nhóm...'>
+                        <input require onkeyup='toggleBtnCreate()' id='nameGroup' name='nameGroup'  type="text" placeholder="Nhập tên nhóm...">
+                        <button id='createGroupBtn' onClick='createGroup()' type='button'>Xác nhận</button>
+                    </form>
+                </div>
             </div>
+            
             <div id='table-group' class="table-group">
-            <table>
-                <caption><h2>Danh sách nhóm được tạo</h2></caption>
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Tên nhóm</th>
-                        <th>Số lượng thành viên</th>
-                        <th>Hành động</th>
-                    </tr>
-                </thead>
-                
-                <tbody id='data-table'></tbody>
-                
-                
-            </table>
-        </div>
+                <table>
+                    <caption><h2>Danh sách nhóm được tạo</h2></caption>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Tên nhóm</th>
+                            <th>Số lượng thành viên</th>
+                            <th>Hành động</th>
+                        </tr>
+                    </thead>
+                    <tbody id='data-table'></tbody>
+                </table>
+            </div>
         </div>
         
 

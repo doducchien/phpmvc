@@ -75,6 +75,18 @@ else if(count($_POST) != 0){
             echo 'NONONo';
         }
     }
+    else if(isset($_POST['createGroup'])){
+        $controller = 'CreateGroup_Controller';
+        $action = 'createGroupAction';
+        $helper = 'group_help';
+        $model = 'Group';
+
+        require PATH_APP . DS . 'controller' . DS . $controller . '.php';
+        $controllerObj = new $controller($model, $view, $helper, $action, $_SESSION['email']);
+        $result = $controllerObj->{$action}($_POST['idGroupCreate'], $_POST['nameGroup']);
+        echo json_encode($result, JSON_UNESCAPED_UNICODE);
+
+    }
 }
 else if(count($_GET) != 0){
     if(isset($_GET['listgroup'])){
