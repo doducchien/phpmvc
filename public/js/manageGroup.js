@@ -73,8 +73,10 @@ function openCreateForm() {
     form_create.classList.toggle('display-block');
 
 
-    idGroupCreate = document.getElementById('idGroupCreate').value.trim();
-    nameGroup = document.getElementById('nameGroup').value.trim();
+    idGroupCreate = document.getElementById('idGroupCreate');
+    nameGroup = document.getElementById('nameGroup');
+    idGroupCreate.value = '';
+    nameGroup.value = '';
     createGroupBtn = document.getElementById('createGroupBtn');
     createGroupBtn.disabled = true;
 
@@ -88,13 +90,16 @@ function createGroup() {
             let alert = document.getElementsByClassName('alert')[0];
             let response = JSON.parse(this.response);
             if (response === true) {
-                alert.style.backgroundColor = 'green';
-                alert.style.color = 'white';
+                alert.style.backgroundColor = '#d4edda';
+                alert.style.color = '#155724';
+                alert.style.borderColor = '#c3e6cb';
                 alert.innerHTML = 'TẠO NHÓM THÀNH CÔNG';
                 init();
             } else {
-                alert.style.backgroundColor = 'red';
-                alert.style.color = 'white';
+                console.log(this.response)
+                alert.style.backgroundColor = '#f8d7da';
+                alert.style.color = '#721c24';
+                alert.style.borderColor = '#f5c6cb';
                 alert.innerHTML = "TẠO NHÓM THẤT BẠI, ĐÃ CÓ LỖI XẢY RA";
             }
         }
@@ -121,7 +126,8 @@ function renameGroup($id) {
             }
         }
     }
-    if (rename !== '') {
+    
+    if (rename !== '' && rename !== null) {
         xhttp2.open('POST', 'index.php', true);
         xhttp2.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
         xhttp2.send(`idGroup=${$id}&rename=${rename}&renameGroup=true`);

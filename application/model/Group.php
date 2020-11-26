@@ -83,7 +83,7 @@ class Group{
             return true;
         }
         else{
-            $stmt1->close();
+            $stmt->close();
             $conn->close();
             
             return false;

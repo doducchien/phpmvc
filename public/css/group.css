@@ -123,5 +123,94 @@
 .group .group-content .right .control .homework{
     background-color: #28a745;
 }
+.content{
+    width: 100%;
+    height: calc(100% - 45px);
+    border: 1px solid gray;
+}
+.doc-content{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    
+}
+.create-doc{
+    width: 30%;
+    min-width: 400px;
+}
+.table-doc{
+    width: 70%;
+}
+.table-doc table{
+    margin: auto;
+}
 
+.create-doc > button{
+    
+    display: block;
+    width: 150px;
+    height: 30px;
+    border: none;
+    background-color: midnightblue;
+    color: white;
+    cursor: pointer;
+    margin: auto;
+    margin-top: 10px;
+}
 
+table, tr, th, td{
+    border: 1px solid blue;
+    border-collapse: collapse;
+}
+th, td{
+    width: 200px;
+    text-align: center;
+}
+tr, caption{
+    height: 30px;
+}
+.stt-doc{
+    width: 100px;
+}
+
+.doc-content .create-doc form{
+    display: none;
+    width: 350px;
+    height: 500px;
+    box-shadow: 0 10px 20px -10px rgba(0, 0, 0, 0.42), 0 4px 25px 0px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2);
+    margin: auto;
+    margin-top: 30px;
+    padding: 15px;
+}
+.doc-content .create-doc form h3{
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
+    background-color: royalblue;
+    color: white;
+    text-align: center;
+    line-height: 130px;
+    margin: auto;
+}
+.doc-content .create-doc form input{
+    display: block;
+    width: 100%;
+    height: 40px;
+    padding: 5px;
+    margin-top: 30px;
+}
+.doc-content .create-doc form button{
+    display: block;
+    width: 100px;
+    height: 30px;
+    margin: auto;
+    margin-top: 20px;
+    border: none;
+    color: white;
+    background-color: tomato;
+    cursor: pointer;
+}
+
+.display-none{
+    display: block;
+}

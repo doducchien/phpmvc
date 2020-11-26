@@ -36,18 +36,52 @@
             </div>
             <div class="right">
                 <div class="control">
-                        <button class='post'>Thảo luận</button>
-                        <button class='doc'>Tài liệu</button>
-                        <button class='homework'>Bài tập về nhà</button>
+                        <button onClick='openControll("post")' class='post'>Thảo luận</button>
+                        <button onClick='openControll("doc")' class='doc'>Tài liệu</button>
+                        <button onClick='openControll("homework")' class='homework'>Bài tập về nhà</button>
                 </div>
                 <div class="content">
                     <div class="post-content">
 
                     </div>
+                    <div class="doc-content">
+                        <div class="table-doc">
+                            <table>
+                                <caption><h2>Danh sách tài liệu</h2></caption>
+                                <thead>
+                                    <tr>
+                                        <th class='stt-doc'>STT</th>
+                                        <th>Tên tài liệu</th>
+                                        <th>Link</th>
+                                        <th>Người tạo</th>
+                                        <th>Hành động</th>
+                                    </tr>
+                                    
+                                </thead>
+                            </table>
+                        </div>
+                        <div class="create-doc">
+                            <button onClick='openFormCreateDoc()'>Thêm tài liệu</button>
+                            <form id='form-create-doc'>
+                                <h3>Tạo tài liệu</h3>
+                                <input id='name-doc' type="text" placeholder='Nhập tên tài liệu...'>
+                                <input id='link-doc' type="text" placeholder='Nhập link tài liệu...'>
+                                <button onClick='createDoc()' type='button'>Tạo</button>
+                            </form>
+                        </div>
+                        
+                    </div>
+
+                    <div class="homework-content"></div>
                 </div>
             </div>
         </div>
     </div>
+
+    <script>
+        var idGroupFromPHP = <?php echo json_encode($result[0]['idGroup'], JSON_HEX_TAG);?>;
+    </script>
+
     <script src="public/js/group.js"></script>
     <script src="public/js/header.js"></script>
 
