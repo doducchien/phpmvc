@@ -47,7 +47,11 @@ if(!isset($_SESSION['email'])){
                         <input require onkeyup="toggleBtnCreate()" id='idGroupCreate' name='idGroupCreate'  type="text" placeholder='Nhập id nhóm...'>
                         <input require onkeyup='toggleBtnCreate()' id='nameGroup' name='nameGroup'  type="text" placeholder="Nhập tên nhóm...">
                         <button id='createGroupBtn' onClick='createGroup()' type='button'>Xác nhận</button>
+
+                        <div class="alert"></div>
                     </form>
+
+                    
                 </div>
             </div>
             

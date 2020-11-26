@@ -53,13 +53,59 @@ class Group{
         $stmt->execute();
         $stmt->bind_result($email, $id_group);
         $stmt->fetch();
+        $stmt->close();
+        $conn->close();
         return $email;
         
     }
 
     public function createGroupAction($idGroup, $nameGroup, $email){
-        return $idGroup;
-    }
+        require_once PATH_SYSTEM  . DS . 'config' . DS . 'config.php';
+        $conn = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
+        if(!$conn) die('kết nối thất bại');
 
+        $query = 'INSERT INTO groups VALUES (?,?,?)';
+        $stmt = $conn->prepare($query);
+        $stmt->bind_param('sss', $id, $name, $email);
+        $id = $idGroup;
+        $name = $nameGroup;
+        $email = $email;
+
+        if($stmt->execute()){
+            $query = 'INSERT INTO member VALUES (?, ?)';
+            $stmt1 = $conn->prepare($query);
+            $stmt1->bind_param('ss', $e, $id);
+            $e = $email;
+            $id = $idGroup;
+            $stmt1->execute();
+            $stmt1->close();
+            $conn->close();
+            return true;
+        }
+        else{
+            $stmt1->close();
+            $conn->close();
+            
+            return false;
+        } 
+
+        
+    }
+    public function renameGroupAction($id, $rename, $email){
+        require_once PATH_SYSTEM  . DS . 'config' . DS . 'config.php';
+        $conn = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
+        if(!$conn) die('kết nối thất bại');
+
+        $query = 'UPDATE groups SET name=? WHERE id=? AND creator=?';
+        $stmt = $conn->prepare($query);
+
+        $stmt->bind_param('sss', $rename, $idgroup, $creator);
+        $rename = $rename;
+        $idgroup = $id;
+        $creator = $email;
+        $result = $stmt->execute();
+        return $result;
+
+    }
 }
 ?>

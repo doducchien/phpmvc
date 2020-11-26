@@ -9,7 +9,8 @@ xhttp.onreadystatechange = function(){
         var listGroup = document.getElementById('list-group-menu');
         var html = '';
         result.forEach(item => {
-            html +=`<li onclick={getGroup(${item.idGroup})} class='a-group'>${item.nameGroup}</li>`;
+            let idGroup = item.idGroup;
+            html +=`<li onclick={getGroup('${idGroup}')} class='a-group'>${item.nameGroup}</li>`;
         });
         listGroup.innerHTML = html;  
     }
@@ -18,8 +19,9 @@ xhttp.open('GET', 'index.php?listgroup=true', true);
 xhttp.send();
 
 
-function getGroup($idGroup){
-    window.location=`index.php?idGroup=${$idGroup}`;
+function getGroup(idGroup){
+    console.log(idGroup);
+    window.location = `index.php?idGroup=${idGroup}`;
 
 }
 

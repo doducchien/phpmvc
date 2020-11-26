@@ -87,6 +87,17 @@ else if(count($_POST) != 0){
         echo json_encode($result, JSON_UNESCAPED_UNICODE);
 
     }
+    else if(isset($_POST['renameGroup'])){
+        $controller = 'RenameGroup_Controller';
+        $action = 'renameGroupAction';
+        $helper = 'group_help';
+        $model = 'Group';
+
+        require PATH_APP . DS . 'controller' . DS . $controller . '.php';
+        $controllerObj = new $controller($model, $view, $helper, $action, $_SESSION['email']);
+        $result = $controllerObj->{$action}($_POST['idGroup'], $_POST['rename']);
+        echo json_encode($result, JSON_UNESCAPED_UNICODE);
+    }
 }
 else if(count($_GET) != 0){
     if(isset($_GET['listgroup'])){
