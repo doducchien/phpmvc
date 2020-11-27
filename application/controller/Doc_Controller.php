@@ -19,5 +19,24 @@ class Doc_Controller extends Controller{
         $modelObj = new $model();
         return $modelObj->{$action}($idGroup, $idDoc, $nameDoc, $linkDoc, $this->email);
     }
+    public function getListDoc($idGroup){
+        include_once PATH_APP . DS . 'model' . DS . $this->model . '.php';
+            
+        $model = $this->model;
+        $action = $this->action;
+
+        $modelObj = new $model();
+        return $modelObj->{$action}($idGroup, $this->email);
+    }
+    
+    public function editDoc($id, $newName, $newLink){
+        include_once PATH_APP . DS . 'model' . DS . $this->model . '.php';
+            
+        $model = $this->model;
+        $action = $this->action;
+
+        $modelObj = new $model();
+        return $modelObj->{$action}($id, $newName, $newLink, $this->email);
+    }
 }
 ?>

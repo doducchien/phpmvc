@@ -108,6 +108,26 @@ else if(count($_POST) != 0){
         $result = $controllerObj->{$action}($_POST['idGroup'], $_POST['idDoc'], $_POST['nameDoc'], $_POST['linkDoc']);
         echo json_encode($result, JSON_UNESCAPED_UNICODE);
     }
+    else if(isset($_POST['getListDoc'])){
+        $controller = 'Doc_Controller';
+        $action = 'getListDoc';
+        $helper = 'doc_helper';
+        $model = 'Doc';
+        require PATH_APP . DS . 'controller' . DS . $controller . '.php';
+        $controllerObj = new $controller($model, $view, $helper, $action, $_SESSION['email']);
+        $result = $controllerObj->{$action}($_POST['idGroup']);
+        echo json_encode($result, JSON_UNESCAPED_UNICODE);
+    }
+    else if(isset($_POST['editDoc'])){
+        $controller = 'Doc_Controller';
+        $action = 'editDoc';
+        $helper = 'doc_helper';
+        $model = 'Doc';
+        require PATH_APP . DS . 'controller' . DS . $controller . '.php';
+        $controllerObj = new $controller($model, $view, $helper, $action, $_SESSION['email']);
+        $result = $controllerObj->{$action}($_POST['idDoc'], $_POST['newName'], $_POST['newLink']);
+        echo json_encode($result, JSON_UNESCAPED_UNICODE);
+    }
 }
 else if(count($_GET) != 0){
     if(isset($_GET['listgroup'])){

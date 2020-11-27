@@ -58,15 +58,20 @@
                                     </tr>
                                     
                                 </thead>
+                                <tbody id='data-table-doc'>
+
+                                </tbody>
                             </table>
                         </div>
+
                         <div class="create-doc">
                             <button onClick='openFormCreateDoc()'>Thêm tài liệu</button>
                             <form id='form-create-doc'>
                                 <h3>Tạo tài liệu</h3>
-                                <input id='name-doc' type="text" placeholder='Nhập tên tài liệu...'>
-                                <input id='link-doc' type="text" placeholder='Nhập link tài liệu...'>
-                                <button onClick='createDoc()' type='button'>Tạo</button>
+                                <input onkeyup='inputCreateDoc()' id='name-doc' type="text" placeholder='Nhập tên tài liệu...' autocomplete='off'>
+                                <input onkeyup='inputCreateDoc()' id='link-doc' type="text" placeholder='Nhập link tài liệu...' autocomplete='off'>
+                                <button id='btn-create-doc' onClick='createDoc()' type='button'>Tạo</button>
+                                <div id='alert-doc'></div>
                             </form>
                         </div>
                         
@@ -80,6 +85,7 @@
 
     <script>
         var idGroupFromPHP = <?php echo json_encode($result[0]['idGroup'], JSON_HEX_TAG);?>;
+        var emailFromPHP = <?php echo json_encode($_SESSION['email'], JSON_HEX_TAG);?>
     </script>
 
     <script src="public/js/group.js"></script>
