@@ -115,11 +115,9 @@
     border: none;
     color: white;
 }
-.group .group-content .right .control .post{
-    background-color: #dc3545;
-}
+
 .group .group-content .right .control .doc{
-    background-color: #17a2b8;
+    background-color: #dc3545;
 }
 .group .group-content .right .control .homework{
     background-color: #28a745;
@@ -131,10 +129,11 @@
     
 }
 .doc-content{
+    /* display: flex; */
     width: 100%;
     height: 100%;
-    display: flex;
     
+    justify-content: space-between;
 }
 .create-doc{
     width: 30%;
@@ -251,4 +250,121 @@ tr:hover{
 }
 .doc-content .table-doc table td img:hover{
     background-color: slategray;
+}
+
+.homework-content{
+    width: 100%;
+    height: 100%;
+    display: flex;
+}
+.list-home-work{
+    width: 75%;
+    list-style: none;
+}
+.list-home-work li{
+    width: 100%;
+    height: 60px;
+    line-height: 60px;
+    margin-bottom: 20px;
+    background-color: rgb(235, 240, 243);
+    display: flex;
+    cursor: pointer;
+    transition: 0.4s;
+}
+.list-home-work li:hover{
+    background-color: #94c9d1
+}
+.list-home-work li span{
+    text-align: start;
+    padding-left: 10px;
+}
+.list-home-work li .bt{
+    width: 50%;
+}
+.list-home-work li .deadline{
+    width: 30%;
+}
+.list-home-work li .action{
+    width: 20%;
+
+}
+.list-home-work li .action img{
+    height: 24px;
+    cursor: pointer;
+    transition: 0.4s;
+
+}
+.list-home-work li .action img:hover{
+    background-color: lightslategray;
+}
+
+.create-homework{
+    width: 25%;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+.create-homework form{
+    display: none;
+    padding: 5px;
+    margin: auto;
+    width: 100%;
+    height: 500px;
+    box-shadow: 0 10px 20px -10px rgba(0, 0, 0, 0.42), 0 4px 25px 0px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2);
+
+
+}
+.create-homework form input{
+    display: block;
+    width: 100%;
+    margin-top: 20px;
+    height: 40px;
+    padding: 5px;
+
+}
+
+.create-homework > button{
+    display: block;
+    margin: auto;
+    width: 100%;
+    height: 40px;
+    border: none;
+    background-color: rgb(60, 78, 179);
+    color: white;
+    margin-bottom: 20px;
+    cursor: pointer;
+}
+.create-homework form h3{
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    background-color: rgb(50, 161, 205);
+    margin: auto;
+    line-height: 150px;
+    text-align: center;
+    color: white;
+}
+.create-homework form button{
+    display: block;
+    margin: auto;
+    width: 100px;
+    height: 40px;
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    cursor: pointer;
+    margin-top: 40px;
+}
+
+.alert-add-btvn{
+    width: 100%;
+    height: 50px;
+    text-align: center;
+    background-color: rgb(196, 94, 58);
+    color: white;
+    line-height: 50px;
+    border-radius: 10px;
+    margin-top: 100px;
+    transition: 0.5s;
+    opacity: 0;
+    
 }

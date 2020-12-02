@@ -36,14 +36,10 @@
             </div>
             <div class="right">
                 <div class="control">
-                        <button onClick='openControll("post")' class='post'>Thảo luận</button>
                         <button onClick='openControll("doc")' class='doc'>Tài liệu</button>
                         <button onClick='openControll("homework")' class='homework'>Bài tập về nhà</button>
                 </div>
                 <div class="content">
-                    <div class="post-content">
-
-                    </div>
                     <div class="doc-content">
                         <div class="table-doc">
                             <table>
@@ -77,13 +73,29 @@
                         
                     </div>
 
-                    <div class="homework-content"></div>
+                    <div class="homework-content">
+                        <ul class="list-home-work"></ul>
+                        <div class="create-homework">
+                            <button onClick='openFormCreateHomework()' id='add-btvn'>Thêm BTVN</button>
+                            <form id='form-add-btvn' action="">
+                                <h3>Thêm BTVN</h3>
+                                <input require id='nameBTVN' type="text" placeholder='Nhập tên BTVN...'>
+                                <input require id='emailAlert' type="email" placeholder='Nhập email thông báo...'>
+                                <input require id='dateDeadline' type="date" placeholder='Nhập ngày deadline...'>
+                                <input require id='timeDeadline' type="time" placeholder='Nhập giờ deadline...'>
+                                <button onClick='createFormBTVN()' id='add-btn-form' type='button'>Tạo</button>
+                            </form>
+                            <h4 class='alert-add-btvn'>CHỈ ADMIN CÓ QUYỀN THÊM BTVN</h4>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
     <script>
+        var nameGroup = <?php echo json_encode($result[0]['nameGroup'], JSON_HEX_TAG);?>;
+        var listMember = <?php echo json_encode($result[1]['listMember'], JSON_HEX_TAG);?>;
         var creatorGroup = <?php echo json_encode($result[0]['creator'], JSON_HEX_TAG);?>;
         var idGroupFromPHP = <?php echo json_encode($result[0]['idGroup'], JSON_HEX_TAG);?>;
         var emailFromPHP = <?php echo json_encode($_SESSION['email'], JSON_HEX_TAG);?>
