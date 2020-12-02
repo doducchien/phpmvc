@@ -38,5 +38,16 @@ class Doc_Controller extends Controller{
         $modelObj = new $model();
         return $modelObj->{$action}($id, $newName, $newLink, $this->email);
     }
+    public function deleteDoc($id){
+        include_once PATH_APP . DS . 'model' . DS . $this->model . '.php';
+            
+        $model = $this->model;
+        $action = $this->action;
+
+        $modelObj = new $model();
+        return $modelObj->{$action}($id);
+    }
 }
+
+
 ?>

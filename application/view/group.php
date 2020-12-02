@@ -84,6 +84,7 @@
     </div>
 
     <script>
+        var creatorGroup = <?php echo json_encode($result[0]['creator'], JSON_HEX_TAG);?>;
         var idGroupFromPHP = <?php echo json_encode($result[0]['idGroup'], JSON_HEX_TAG);?>;
         var emailFromPHP = <?php echo json_encode($_SESSION['email'], JSON_HEX_TAG);?>
     </script>

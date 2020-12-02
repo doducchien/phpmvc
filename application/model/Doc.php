@@ -99,5 +99,22 @@ class Doc{
         $conn->close();
         return $result;
     }
+    public function deleteDoc($id){
+        require_once PATH_SYSTEM  . DS . 'config' . DS . 'config.php';
+
+        $conn = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
+
+        if(!$conn) die('kết nối thất bại');
+
+        $query = 'DELETE FROM file WHERE id = ?';
+        $stmt = $conn->prepare($query);
+        $stmt->bind_param('s', $i);
+        $i = $id;
+
+        $result = $stmt->execute();
+        $stmt->close();
+        $conn->close();
+        return $result;
+    }
 }
 ?>

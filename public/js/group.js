@@ -118,8 +118,6 @@ function initDoc() {
     xhttp2.onreadystatechange = function () {
         if (this.readyState === 4 || this.readyState === 200) {
             let response = JSON.parse(this.response);
-
-            console.log(response);
             if (response !== false) {
                 let index = 1;
                 let dataTableDoc = document.getElementById('data-table-doc');
@@ -200,7 +198,22 @@ function reDoc(id, creator, name, link) {
 }
 
 function deleteDoc(id, creator) {
+    if(emailFromPHP !== creator && emailFromPHP !== creatorGroup) alert("Chỉ người tạo hoặc trưởng nhóm được xóa!");
+    else{
+        let xhttp4 = new XMLHttpRequest();
+        xhttp4.onreadystatechange = function(){
+            if(this.readyState == 4 || this.readyState == 200){
+                let response = JSON.parse(this.response);
+                if(response === true) alert("Xóa thành công");
+                else alert("Xóa thất bại.");
 
+                initDoc();  
+            }
+        }
+        xhttp4.open('POST', 'index.php', true);
+        xhttp4.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+        xhttp4.send(`idDoc=${id}&deleteDoc=${true}`);
+    }
 }
 
 function inputCreateDoc() {
