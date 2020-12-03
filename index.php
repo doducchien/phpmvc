@@ -160,6 +160,17 @@ else if(count($_POST) != 0){
         $result = $controllerObj->{$action}($_POST['idGroup']);
         echo json_encode($result, JSON_UNESCAPED_UNICODE);
     }
+    else if(isset($_POST['editHomework'])){
+        $controller = 'Homework_Controller';
+        $action = 'editHomework';
+        $helper = 'doc_helper';
+        $model = 'Homework';
+        
+        require PATH_APP . DS . 'controller' . DS . $controller . '.php';
+        $controllerObj = new $controller($model, $view, $helper, $action, $_SESSION['email']);
+        $result = $controllerObj->{$action}($_POST['id'], $_POST['idGroup'], $_POST['newName']);
+        echo json_encode($result, JSON_UNESCAPED_UNICODE);
+    }
 }
 else if(count($_GET) != 0){
     if(isset($_GET['listgroup'])){
@@ -227,6 +238,17 @@ else if(count($_GET) != 0){
         $controllerObj = new $controller($model, $view, $helper, $action, $email);
         $result = $controllerObj->{$action}();
         echo json_encode($result, JSON_UNESCAPED_UNICODE);
+    }
+    else if(isset($_GET['detailHomework'])){
+
+        $controller = 'Homework_Controller';
+        $action = 'getDetailHomework';
+        $helper = 'doc_helper';
+        $model = 'Homework';
+        
+        require PATH_APP . DS . 'controller' . DS . $controller . '.php';
+        $controllerObj = new $controller($model, $view, $helper, $action, $_SESSION['email']);
+        $controllerObj->{$action}($_GET['idHomework'], $_GET['idG']);
     }
     
 }

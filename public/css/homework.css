@@ -1,0 +1,51 @@
+.homework{
+    width: 100%;
+    height: 100%;
+    
+    font-size: 14px;
+    font-weight: 400;
+    
+}
+
+.homework-content{
+    padding: 10px;
+    margin: auto;
+    width: 1500px;
+    height: 800px;
+    margin-top: 60px;
+    display: flex;
+    box-shadow: 0 10px 20px -10px rgba(0, 0, 0, 0.42), 0 4px 25px 0px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2);
+
+}
+.homework-content .left{
+    width: 50%;
+    height: 100%;
+}
+.homework-content .left h3{
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    background-color: #C32361;
+    color: white;
+    line-height: 150px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+.homework-content .left h4{
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.homework-content .left p{
+    font-size: 16px;
+    font-weight: 400;
+    font-family: "Segoe UI Web", "Segoe UI", "Segoe WP", Tahoma, Arial, sans-serif;
+    font-style: oblique;
+}
+.homework-content .rigbt{
+    width: 50%;
+    height: 100%;
+}
+
+#nameHomework{
+    font-style: normal;
+}

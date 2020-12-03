@@ -11,8 +11,22 @@
 </head>
 <body>
     <div class="group">
+        
         <?php include ('header.php') ?>
+        <form class='form-edit'>
+                    <h3>Chỉnh sửa BTVN</h3>
+                    <textarea id='edit-content' placeholder='Nhập nội dung BTVN mới...'></textarea>
+                    <input id='edit-date' type="date">
+                    <input id='edit-time' type="time">
+                    <div class='btn-edit'>
+                        <button onClick='closeEditHomework()' id='btn-huy' type='button'>Huỷ</button>
+                        <button id='btn-xn' type='button'>Xác nhận</button>
+                    </div>
+                </form>
         <div class="group-content">
+            <div class="edit-homework">
+                            
+            </div>
             <div class="left">
 
                 <div class="top">
@@ -74,12 +88,13 @@
                     </div>
 
                     <div class="homework-content">
+                        
                         <ul class="list-home-work"></ul>
                         <div class="create-homework">
                             <button onClick='openFormCreateHomework()' id='add-btvn'>Thêm BTVN</button>
                             <form id='form-add-btvn' action="">
                                 <h3>Thêm BTVN</h3>
-                                <input require id='nameBTVN' type="text" placeholder='Nhập tên BTVN...'>
+                                <textarea  id='nameBTVN' placeholder='Nhập nội dung BTVN...'></textarea>
                                 <input require id='emailAlert' type="email" placeholder='Nhập email thông báo...'>
                                 <input require id='dateDeadline' type="date" placeholder='Nhập ngày deadline...'>
                                 <input require id='timeDeadline' type="time" placeholder='Nhập giờ deadline...'>
@@ -92,6 +107,8 @@
             </div>
         </div>
     </div>
+    
+</div>
 
     <script>
         var nameGroup = <?php echo json_encode($result[0]['nameGroup'], JSON_HEX_TAG);?>;

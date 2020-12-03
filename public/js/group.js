@@ -51,15 +51,14 @@ initDoc();
 
 function openControll(component) {
     if (component === 'doc') {
-   
+
         doc_content.style.display = 'flex';
         homeWork_content.style.display = 'none';
         initDoc();
 
         form_create_doc = document.getElementById('form-create-doc');
 
-    }
-    else {
+    } else {
         doc_content.style.display = 'none';
         homeWork_content.style.display = 'flex';
         initHomework();
@@ -232,8 +231,9 @@ function initHomework() {
     xhttp5.onreadystatechange = function () {
         if (this.readyState == 4 || this.readyState == 200) {
             let response = JSON.parse(this.response);
-            console.log(response);
+            console.log(this.response);
             listHomework.innerHTML = '';
+            let i = 0;
             response.forEach(item => {
 
 
@@ -243,8 +243,8 @@ function initHomework() {
                 let span2 = document.createElement('span');
                 let span3 = document.createElement('span');
 
-                span1.setAttribute('class', 'bt');
-                span2.setAttribute('class', 'deadline');
+                span1.setAttribute('class', 'bt bt' + i );
+                span2.setAttribute('class', 'deadline deadline' + i);
                 span3.setAttribute('class', 'action');
 
 
@@ -257,10 +257,15 @@ function initHomework() {
                 let img3 = document.createElement('img');
 
 
-                a.setAttribute('href', `index.php?idHomework=${item.id}`);
+                a.setAttribute('href', `index.php?idG=${item.idG}&idHomework=${item.id}&detailHomework=${true}`);
                 img1.setAttribute('src', "public/assets/icon/group/upload.png");
                 img2.setAttribute('src', "public/assets/icon/manageGroup/rename.png");
                 img3.setAttribute('src', "public/assets/icon/manageGroup/delete.png");
+
+                img2.setAttribute('onClick', `editHomework('${item.id}', '${item.idG}', '${i}')`);
+                img3.setAttribute('onClick', `deleteHomework(${item.id})`);
+
+
 
                 a.appendChild(img1);
                 span3.appendChild(a);
@@ -277,6 +282,7 @@ function initHomework() {
                 li.appendChild(span2);
                 li.appendChild(span3);
                 listHomework.appendChild(li);
+                i++;
             })
 
 
@@ -340,14 +346,14 @@ function createFormBTVN() {
                     initHomework();
                     let listMail = String(listMember);
                     let subject = "BTVN" + ' - ' + nameGroup;
-                    let body = `Chào các bạn,\n Tôi vừa tạo một bài tập trên nhóm của chúng ta.\n Deadline của bài tập này là ${timeToString(deadline)}.\n Các bạn hoàn thành nó trước deadline này nhé.`+ '\n' + " Cảm ơn !"; 
+                    let body = `Chào các bạn,\n Tôi vừa tạo một bài tập trên nhóm của chúng ta.\n Deadline của bài tập này là ${timeToString(deadline)}.\n Các bạn hoàn thành nó trước deadline này nhé.` + '\n' + " Cảm ơn !";
                     window.open(`mailto:${listMail}?subject=${subject}&body=${body}`);
                     console.log(listMember);
                 }
             }
             xhttp.open('POST', 'index.php', true);
             xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-            xhttp.send(`id=${idHomework}&idGroup=${idGroupFromPHP}&name=${nameBTVN}&emailAlert=${emailAlert}&deadline=${deadline}&createHomework=${true}`);
+            xhttp.send(`id=${idHomework}&&idGroup=${idGroupFromPHP}&name=${nameBTVN}&emailAlert=${emailAlert}&deadline=${deadline}&createHomework=${true}`);
         }
 
 
@@ -370,4 +376,54 @@ function timeToString(timeNumber) {
     month = month < 10 ? '0' + month : month;
 
     return hours + ":" + mi + " - " + date + "/" + month + "/" + year;
+}
+
+function editHomework(id, idG, i) {
+    if (emailFromPHP == creatorGroup) {
+        let editHomework = document.getElementsByClassName('edit-homework')[0];
+        let formEdit = document.getElementsByClassName('form-edit')[0];
+        let bt = (document.getElementsByClassName('bt' + i)[0]).textContent.trim();
+        let editContent = document.getElementById('edit-content');
+        // let editDate = document.getElementById('edit-date');
+        // let editTime = document.getElementById('edit-time');
+        console.log(bt)
+
+        editContent.innerHTML = bt;
+
+        editHomework.style.display = 'block';
+        formEdit.style.display = 'block'
+   
+        // if (newName !== null && newName.trim() !== '') {
+            
+        //     // console.log(newName);
+        //     let xhttp = new XMLHttpRequest();
+        //     xhttp.onreadystatechange = function(){
+        //         if (this.readyState == 4 || this.readyState == 200) {
+                    
+        //             let response = JSON.parse(this.response);
+        //             console.log(response)
+        //             if(response) initHomework();
+        //             else alert("Đã có lỗi xảy ra!");
+                    
+        //         }
+        //     }
+
+        //     xhttp.open('POST', 'index.php', true);
+        //     xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+        //     xhttp.send(`id=${id}&idGroup=${idG}&newName=${newName}&editHomework=${true}`);
+        // }
+
+
+    } else alert("Chỉ admin nhóm có quyền chỉnh sửa");
+}
+
+function deleteHomework(id) {
+    console.log(id);
+}
+
+function closeEditHomework(){
+    let editHomework = document.getElementsByClassName('edit-homework')[0];
+    let formEdit = document.getElementsByClassName('form-edit')[0];
+    editHomework.style.display = 'none';
+    formEdit.style.display = 'none';
 }
