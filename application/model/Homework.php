@@ -70,7 +70,7 @@ class Homework{
             return false;
         }
     }
-    public function editHomework($id, $idGroup, $newName, $email){
+    public function editHomework($id, $idGroup, $newName, $newDeadline, $email){
         require_once PATH_SYSTEM  . DS . 'config' . DS . 'config.php';
 
         $conn = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
@@ -86,9 +86,9 @@ class Homework{
 
         $count = $stmt->num_rows(); 
         if($count == 1){
-            $query = 'UPDATE assignment SET name=? WHERE id=?';
+            $query = 'UPDATE assignment SET name=? , deadline=? WHERE id=?';
             $stmt = $conn->prepare($query);
-            $stmt->bind_param('ss',$newName, $id);
+            $stmt->bind_param('sss',$newName, $newDeadline, $id);
             $result = $stmt->execute();
             $stmt->close();
             $conn->close();
@@ -109,7 +109,7 @@ class Homework{
 
         if(!$conn) die('kết nối thất bại');
         $result = [];
-        $query = 'SELECT * FROM groups WHERE id = ? AND creator = ?';
+        $query = 'SELECT * FROM member WHERE id_group = ? AND email = ?';
         $stmt = $conn->prepare($query);
         $stmt->bind_param('ss', $idGroup, $email);
         $stmt->execute();
@@ -141,6 +141,176 @@ class Homework{
             $conn->close();
             return false;
         }
-    }   
+    }
+    
+    public function submitHomework($id, $idHomework, $idGroup, $link, $timeSubmit, $email){
+
+        require_once PATH_SYSTEM  . DS . 'config' . DS . 'config.php';
+
+        $conn = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
+
+        if(!$conn) die('kết nối thất bại');
+        $result = [];
+        $query = 'SELECT * FROM member WHERE id_group = ? AND email = ?';
+        $stmt = $conn->prepare($query);
+        $stmt->bind_param('ss', $idGroup, $email);
+        $stmt->execute();
+        $stmt->store_result();
+        $count = $stmt->num_rows();
+        if($count == 1){
+            $query = 'SELECT * FROM assignment WHERE id_group = ? AND id = ?';
+            $stmt = $conn->prepare($query);
+            $stmt->bind_param('ss', $idGroup, $idHomework);
+            $stmt->execute();
+            $stmt->store_result();
+            $count = $stmt->num_rows();
+            if($count == 1){
+                $query = 'INSERT INTO homework VALUES(?, ?, ?, ?, ?)';
+                $stmt = $conn->prepare($query);
+                $stmt->bind_param('ssssi',$idHomework, $id, $email, $link, $timeSubmit);
+                if($stmt->execute()){
+                    $stmt->close();
+                    $conn->close();
+                    return true;
+                }
+                
+            }
+            
+        }
+        $stmt->close();
+        $conn->close();
+        return false;
+        
+    } 
+    public function getSubmitedHomework($idHomework, $idGroup, $email){
+        require_once PATH_SYSTEM  . DS . 'config' . DS . 'config.php';
+
+        $conn = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
+
+        if(!$conn) die('kết nối thất bại');
+        $result = [];
+        $query = 'SELECT * FROM member WHERE id_group = ? AND email = ?';
+        $stmt = $conn->prepare($query);
+        $stmt->bind_param('ss', $idGroup, $email);
+        $stmt->execute();
+        $stmt->store_result();
+        $count = $stmt->num_rows();
+        if($count == 1){
+            $query = 'SELECT * FROM assignment WHERE id_group = ? AND id = ?';
+            $stmt = $conn->prepare($query);
+            $stmt->bind_param('ss', $idGroup, $idHomework);
+            $stmt->execute();
+            $stmt->store_result();
+            $count = $stmt->num_rows();
+            if($count == 1){
+                $query = 'SELECT * FROM homework WHERE id_ass = ? AND submiter = ? ORDER BY time DESC';
+                $stmt = $conn->prepare($query);
+                $stmt->bind_param('ss', $idHomework, $email);
+                $stmt->execute();
+                $stmt->bind_result($id_ass, $id, $submiter, $link, $time);
+                while($stmt->fetch()){
+                    $data['id_ass'] = $id_ass;
+                    $data['id'] = $id;
+                    $data['submiter'] = $submiter;
+                    $data['link'] = $link;
+                    $data['time'] = $time;
+                    array_push($result, $data);
+                }
+                $stmt->close();
+                $conn->close();
+                return $result;
+                
+            }
+        }
+        $stmt->close();
+        $conn->close();
+        return false;
+    }
+
+     
+
+    public function getSubmiter($idHomework, $idGroup, $email){
+        require_once PATH_SYSTEM  . DS . 'config' . DS . 'config.php';
+
+        $conn = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
+
+        if(!$conn) die('kết nối thất bại');
+        $result = [];
+        $query = 'SELECT * FROM groups WHERE id = ? AND creator = ?';
+        $stmt = $conn->prepare($query);
+        $stmt->bind_param('ss', $idGroup, $email);
+        $stmt->execute();
+        $stmt->store_result();
+        $count = $stmt->num_rows();
+        if($count == 1){
+            $query = 'SELECT * FROM assignment WHERE id = ? AND id_group = ?';
+            $stmt = $conn->prepare($query);
+            $stmt->bind_param('ss',$idHomework, $idGroup);
+            $stmt->execute();
+            $stmt->store_result();
+            $count = $stmt->num_rows();
+            if($count == 1){
+                
+                $query = 'SELECT * FROM homework WHERE id_ass = ? GROUP BY submiter';
+                $stmt = $conn->prepare($query);
+                $stmt->bind_param('s', $idHomework);
+                $stmt->execute();
+                $stmt->bind_result($id_ass, $id, $submiter, $link, $time);
+                while($stmt->fetch()){
+                    $data['id_ass'] = $id_ass;
+                    $data['id'] = $id;
+                    $data['submiter'] = $submiter;
+                // $data['link'] = $link;
+                // $data['time'] = $time;
+                    array_push($result, $data);
+                }
+            $stmt->close();
+            $conn->close();
+            return $result;
+            }
+
+            
+        }
+        $stmt->close();
+        $conn->close();
+        return false;
+    }
+    public function checkSubmited($idHomework, $idGroup, $email, $submiter){
+        require_once PATH_SYSTEM  . DS . 'config' . DS . 'config.php';
+
+        $conn = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
+
+        if(!$conn) die('kết nối thất bại');
+        $result = [];
+        $query = 'SELECT * FROM groups WHERE id = ? AND creator = ?';
+        $stmt = $conn->prepare($query);
+        $stmt->bind_param('ss', $idGroup, $email);
+        $stmt->execute();
+        $stmt->store_result();
+        $count = $stmt->num_rows();
+
+        if($count == 1){
+            $query = 'SELECT * FROM homework WHERE id_ass = ? AND submiter = ? ORDER BY time DESC';
+            $stmt = $conn->prepare($query);
+            $stmt->bind_param('ss', $idHomework, $submiter);
+            $stmt->execute();
+            $stmt->bind_result($id_ass, $id, $submiter, $link, $time);
+            while($stmt->fetch()){
+                $data['id_ass'] = $id_ass;
+                $data['id'] = $id;
+                $data['submiter'] = $submiter;
+                $data['link'] = $link;
+                $data['time'] = $time;
+                array_push($result, $data);
+            }
+            $stmt->close();
+            $conn->close();
+            return $result;
+        }
+
+        $stmt->close();
+        $conn->close();
+        return false;
+    }
 }
 ?>

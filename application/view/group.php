@@ -15,12 +15,12 @@
         <?php include ('header.php') ?>
         <form class='form-edit'>
                     <h3>Chỉnh sửa BTVN</h3>
-                    <textarea id='edit-content' placeholder='Nhập nội dung BTVN mới...'></textarea>
+                    <textarea spellCheck='false' id='edit-content' placeholder='Nhập nội dung BTVN mới...'></textarea>
                     <input id='edit-date' type="date">
                     <input id='edit-time' type="time">
                     <div class='btn-edit'>
                         <button onClick='closeEditHomework()' id='btn-huy' type='button'>Huỷ</button>
-                        <button id='btn-xn' type='button'>Xác nhận</button>
+                        <button onClick='confirmEditHomework()' id='btn-xn' type='button'>Xác nhận</button>
                     </div>
                 </form>
         <div class="group-content">
@@ -50,8 +50,9 @@
             </div>
             <div class="right">
                 <div class="control">
-                        <button onClick='openControll("doc")' class='doc'>Tài liệu</button>
-                        <button onClick='openControll("homework")' class='homework'>Bài tập về nhà</button>
+                    <button onClick='openControll("homework")' class='homework'>Bài tập về nhà</button>
+                    <button onClick='openControll("doc")' class='doc'>Tài liệu</button>
+                        
                 </div>
                 <div class="content">
                     <div class="doc-content">

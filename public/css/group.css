@@ -419,6 +419,11 @@ tr:hover{
     padding: 5px;
     margin-bottom: 10px;
     border: 2px solid rgb(60, 78, 179);
+    scrollbar-width: thin;
+    -webkit-scrollbar: 2px;
+}
+.form-edit textarea::-webkit-scrollbar{
+    width: 10px;
 }
 .form-edit input{
     width: 100%;

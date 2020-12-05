@@ -1,8 +1,12 @@
 <?php
     require_once PATH_SYSTEM . DS . 'helper' . DS . 'connectDB.php';
     
-    function emailAction($email, $conn){
+    function emailAction($email){
+        require_once PATH_SYSTEM  . DS . 'config' . DS . 'config.php';
 
+        $conn = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
+    
+        if(!$conn) die('kết nối thất bại');
         $query = 'SELECT email FROM users WHERE email = ?';
         $stmt = $conn->prepare($query);
 
@@ -22,12 +26,16 @@
 
     }
 
-    function idAction($id, $conn){
+    function idAction($id){
+        require_once PATH_SYSTEM  . DS . 'config' . DS . 'config.php';
+
+        $conn = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
+
+        if(!$conn) die('kết nối thất bại');
         $query = 'SELECT id FROM organization WHERE id = ?';
         $stmt = $conn->prepare($query);
-
-        $stmt->bind_param('s', $i);
-        $i = $id;
+        $stmt->bind_param('s', $id);
+        // $i = $id;
 
         $stmt->execute();
 

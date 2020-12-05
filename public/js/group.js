@@ -45,8 +45,9 @@ var doc_content = document.getElementsByClassName('doc-content')[0];
 var homeWork_content = document.getElementsByClassName('homework-content')[0];
 var form_create_doc;
 
-doc_content.style.display = 'flex';
-homeWork_content.style.display = 'none';
+homeWork_content.style.display = 'flex';
+doc_content.style.display = 'none';
+initHomework();
 initDoc();
 
 function openControll(component) {
@@ -230,8 +231,8 @@ function initHomework() {
 
     xhttp5.onreadystatechange = function () {
         if (this.readyState == 4 || this.readyState == 200) {
+            console.log(this.response)
             let response = JSON.parse(this.response);
-            console.log(this.response);
             listHomework.innerHTML = '';
             let i = 0;
             response.forEach(item => {
@@ -243,7 +244,7 @@ function initHomework() {
                 let span2 = document.createElement('span');
                 let span3 = document.createElement('span');
 
-                span1.setAttribute('class', 'bt bt' + i );
+                span1.setAttribute('class', 'bt bt' + i);
                 span2.setAttribute('class', 'deadline deadline' + i);
                 span3.setAttribute('class', 'action');
 
@@ -257,7 +258,7 @@ function initHomework() {
                 let img3 = document.createElement('img');
 
 
-                a.setAttribute('href', `index.php?idG=${item.idG}&idHomework=${item.id}&detailHomework=${true}`);
+                a.setAttribute('href', `index.php?idG=${item.idG}&idHomework=${item.id}&creatorGroup=${creatorGroup}&detailHomework=${true}`);
                 img1.setAttribute('src', "public/assets/icon/group/upload.png");
                 img2.setAttribute('src', "public/assets/icon/manageGroup/rename.png");
                 img3.setAttribute('src', "public/assets/icon/manageGroup/delete.png");
@@ -284,8 +285,6 @@ function initHomework() {
                 listHomework.appendChild(li);
                 i++;
             })
-
-
 
         }
 
@@ -353,7 +352,7 @@ function createFormBTVN() {
             }
             xhttp.open('POST', 'index.php', true);
             xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-            xhttp.send(`id=${idHomework}&&idGroup=${idGroupFromPHP}&name=${nameBTVN}&emailAlert=${emailAlert}&deadline=${deadline}&createHomework=${true}`);
+            xhttp.send(`id=${idHomework}&idGroup=${idGroupFromPHP}&name=${nameBTVN}&emailAlert=${emailAlert}&deadline=${deadline}&createHomework=${true}`);
         }
 
 
@@ -377,6 +376,9 @@ function timeToString(timeNumber) {
 
     return hours + ":" + mi + " - " + date + "/" + month + "/" + year;
 }
+var idHomework = '';
+var idGHomework = '';
+var indexHomework = null;
 
 function editHomework(id, idG, i) {
     if (emailFromPHP == creatorGroup) {
@@ -386,25 +388,29 @@ function editHomework(id, idG, i) {
         let editContent = document.getElementById('edit-content');
         // let editDate = document.getElementById('edit-date');
         // let editTime = document.getElementById('edit-time');
+        idHomework = id;
+        idGHomework = idG;
+        indexHomework = i;
+
         console.log(bt)
 
         editContent.innerHTML = bt;
 
         editHomework.style.display = 'block';
         formEdit.style.display = 'block'
-   
+
         // if (newName !== null && newName.trim() !== '') {
-            
+
         //     // console.log(newName);
         //     let xhttp = new XMLHttpRequest();
         //     xhttp.onreadystatechange = function(){
         //         if (this.readyState == 4 || this.readyState == 200) {
-                    
+
         //             let response = JSON.parse(this.response);
         //             console.log(response)
         //             if(response) initHomework();
         //             else alert("Đã có lỗi xảy ra!");
-                    
+
         //         }
         //     }
 
@@ -421,9 +427,55 @@ function deleteHomework(id) {
     console.log(id);
 }
 
-function closeEditHomework(){
+function closeEditHomework() {
     let editHomework = document.getElementsByClassName('edit-homework')[0];
     let formEdit = document.getElementsByClassName('form-edit')[0];
     editHomework.style.display = 'none';
     formEdit.style.display = 'none';
+}
+
+function confirmEditHomework() {
+    let editHomework = document.getElementsByClassName('edit-homework')[0];
+    let formEdit = document.getElementsByClassName('form-edit')[0];
+    let btn = document.getElementById('btn-xn');
+    let editContent = document.getElementById('edit-content');
+    let editDate = document.getElementById('edit-date');
+    let editTime = document.getElementById('edit-time');
+
+    if (editContent.value.trim() == '' || editContent.value.trim() == undefined ||
+        editDate.value.trim() == '' || editDate.value.trim() == undefined ||
+        editTime.value.trim() == '' || editTime.value.trim() == undefined) {
+
+        alert('Bạn cần nhập đầy đủ các trường thông tin');
+    } else {
+        let dateA = editDate.value.split('-');
+        let timeA = editTime.value.split(':');
+        let splitTime = dateA.concat(timeA);
+        let newDeadline = new Date(splitTime[0], splitTime[1] - 1, splitTime[2], splitTime[3], splitTime[4]);
+        if (Number(newDeadline) - Number(new Date()) < 0) alert('Deadline phải là một thời điểm trong tương lai');
+        else {
+            let xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function () {
+                if (this.readyState == 4 || this.readyState == 200) {
+
+                    let response = JSON.parse(this.response);
+                    editHomework.style.display = 'none';
+                    formEdit.style.display = 'none';
+                    if (response){
+                        initHomework();
+                        alert("Cập nhật thành công");
+                    }
+                    else alert("Đã có lỗi xảy ra!");
+
+                }
+            }
+            xhttp.open('POST', 'index.php', true);
+        xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+        xhttp.send(`id=${idHomework}&idGroup=${idGHomework}&newName=${editContent.value.trim()}&newDeadline=${Number(newDeadline)}&editHomework=${true}`);
+        }
+
+
+        
+    }
+
 }

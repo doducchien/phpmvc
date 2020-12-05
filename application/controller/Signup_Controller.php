@@ -29,8 +29,6 @@ class Signup_Controller extends Controller{
         
         $modelObj = new $model($email, $password, $repassword, $fullName, $age, $id_organization, $admin, $img, $helper);
         $result = $modelObj->{$this->action}();
-        
-        
 
         ob_start();
         require PATH_APP .DS . 'view' . DS . 'signup.php';
