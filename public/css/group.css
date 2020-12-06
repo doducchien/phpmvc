@@ -386,7 +386,6 @@ tr:hover{
     height: calc(100% - 80px);
     border: 2px solid gray;
     position: absolute;
-    z-index: 100;
     top: 80px;
     padding: 10px;
     background-color: rgb(27, 24, 24);
@@ -448,4 +447,60 @@ tr:hover{
 #btn-xn{
     background-color: rgb(196, 21, 21);
     color: white;
+}
+
+.showMember{
+    display: none;
+    width: 500px;
+    height: 420px;
+    box-shadow: 0 10px 20px -10px rgba(0, 0, 0, 0.42), 0 4px 25px 0px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2);
+    position: absolute;
+    top: 200px;
+    left: calc(50% - 200px);
+    background-color: white;
+    padding: 15px;
+    z-index: 10000;
+}
+.showMember .fullname{
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    background-color: rgb(128, 0, 128);
+    color: white;
+    margin: auto;
+    text-align: center;
+    padding-top: 80px;
+
+}
+.showMember .btn-member{
+    width: 100%;
+    bottom: 15px;
+    display: flex;
+    justify-content: center;
+    margin-top: 45px;
+    height: 40px
+}
+.showMember .btn-member button{
+    width: 100px;
+    height: 100%;
+    border: none;
+    cursor: pointer;
+    color: white;
+    margin: 5px;
+}
+.showMember p{
+    width: 100%;
+    height: 25px;
+    text-align: center;
+    line-height: 30px;
+    margin-top: 5px;
+}
+
+.delete-mem{
+    background-color: rgb(196, 21, 21);
+    
+}
+
+.close-mem{
+    background-color: rgb(5, 82, 145);
 }

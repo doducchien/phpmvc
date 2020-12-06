@@ -12,9 +12,7 @@
     <ul class="menu">
         <li><a href="">Trang chủ</a> </li>
         <li><a href="application/view/manageGroup.php">Quản lý nhóm</a> </li>
-        <li><a href="">Tài liệu</a></li>
-            
-        <li><a href="">Liên hệ</a></li>
+        
         <li class='acc'>
             <span onClick='toggleControllAcc()'><?php  echo $_SESSION['email']?></span>
             <div id='control-acc' class='control-acc'>

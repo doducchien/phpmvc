@@ -35,5 +35,14 @@ class Account_Controller extends Controller{
         $result = $modelObj->{$action}($email, $fullname, $age);
         return $result;
     }
+    public function getInfoMember($email){
+        include_once PATH_APP . DS . 'model' . DS . $this->model . '.php';
+        $model = $this->model;
+        $action = 'accountAction';
+
+        $modelObj = new $model();
+        $result = $modelObj->{$action}($email);
+        return $result;
+    }
 }
 ?>

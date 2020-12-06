@@ -231,7 +231,7 @@ function initHomework() {
 
     xhttp5.onreadystatechange = function () {
         if (this.readyState == 4 || this.readyState == 200) {
-            console.log(this.response)
+            // console.log(this.response)
             let response = JSON.parse(this.response);
             listHomework.innerHTML = '';
             let i = 0;
@@ -264,7 +264,7 @@ function initHomework() {
                 img3.setAttribute('src', "public/assets/icon/manageGroup/delete.png");
 
                 img2.setAttribute('onClick', `editHomework('${item.id}', '${item.idG}', '${i}')`);
-                img3.setAttribute('onClick', `deleteHomework(${item.id})`);
+                img3.setAttribute('onClick', `deleteHomework('${item.id}', '${item.idG}')`);
 
 
 
@@ -332,7 +332,7 @@ function createFormBTVN() {
         let dateA = dateDeadline.split('-');
         let timeA = timeDeadline.split(':');
         let splitTime = dateA.concat(timeA);
-        let deadline = new Date(splitTime[0], splitTime[1] - 1, splitTime[2], splitTime[3], splitTime[4]);
+        let deadline = new Date(splitTime[0], splitTime[1], splitTime[2], splitTime[3], splitTime[4]);
         deadline = Number(deadline);
         var now = new Date()
         now = Number(now);
@@ -366,7 +366,7 @@ function timeToString(timeNumber) {
     var hours = time.getHours();
     var mi = time.getMinutes();
     var date = time.getDate();
-    var month = time.getMonth();
+    var month = time.getMonth() + 1;
     var year = time.getFullYear();
 
     hours = hours < 10 ? '0' + hours : hours;
@@ -399,32 +399,27 @@ function editHomework(id, idG, i) {
         editHomework.style.display = 'block';
         formEdit.style.display = 'block'
 
-        // if (newName !== null && newName.trim() !== '') {
-
-        //     // console.log(newName);
-        //     let xhttp = new XMLHttpRequest();
-        //     xhttp.onreadystatechange = function(){
-        //         if (this.readyState == 4 || this.readyState == 200) {
-
-        //             let response = JSON.parse(this.response);
-        //             console.log(response)
-        //             if(response) initHomework();
-        //             else alert("Đã có lỗi xảy ra!");
-
-        //         }
-        //     }
-
-        //     xhttp.open('POST', 'index.php', true);
-        //     xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-        //     xhttp.send(`id=${id}&idGroup=${idG}&newName=${newName}&editHomework=${true}`);
-        // }
-
 
     } else alert("Chỉ admin nhóm có quyền chỉnh sửa");
 }
 
-function deleteHomework(id) {
-    console.log(id);
+function deleteHomework(id, idG) {
+    console.log(id, idG);
+    let xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 || this.readyState == 200) {
+            console.log(this.response)
+            let response = JSON.parse(this.response);
+            if (response) alert("Xóa thành công");
+            else alert("Xóa thất bại! Đã có lỗi xảy ra");
+
+            initHomework();
+
+        }
+    }
+    xhttp.open('POST', 'index.php', true);
+    xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    xhttp.send(`id=${id}&idGroup=${idG}&deleteHomework=${true}`);
 }
 
 function closeEditHomework() {
@@ -454,6 +449,7 @@ function confirmEditHomework() {
         let newDeadline = new Date(splitTime[0], splitTime[1] - 1, splitTime[2], splitTime[3], splitTime[4]);
         if (Number(newDeadline) - Number(new Date()) < 0) alert('Deadline phải là một thời điểm trong tương lai');
         else {
+            console.log(newDeadline)
             let xhttp = new XMLHttpRequest();
             xhttp.onreadystatechange = function () {
                 if (this.readyState == 4 || this.readyState == 200) {
@@ -461,21 +457,95 @@ function confirmEditHomework() {
                     let response = JSON.parse(this.response);
                     editHomework.style.display = 'none';
                     formEdit.style.display = 'none';
-                    if (response){
+                    if (response) {
                         initHomework();
                         alert("Cập nhật thành công");
-                    }
-                    else alert("Đã có lỗi xảy ra!");
+                    } else alert("Đã có lỗi xảy ra!");
 
                 }
             }
             xhttp.open('POST', 'index.php', true);
-        xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-        xhttp.send(`id=${idHomework}&idGroup=${idGHomework}&newName=${editContent.value.trim()}&newDeadline=${Number(newDeadline)}&editHomework=${true}`);
+            xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+            xhttp.send(`id=${idHomework}&idGroup=${idGHomework}&newName=${editContent.value.trim()}&newDeadline=${Number(newDeadline)}&editHomework=${true}`);
         }
 
 
-        
+
     }
+
+}
+
+var memmber = '';
+
+function openModalMember(email, idGroup) {
+    memmber = email;
+    var showMember = document.getElementsByClassName('showMember')[0];
+    var editHomework = document.getElementsByClassName('edit-homework')[0];
+    showMember.style.display = 'block';
+    editHomework.style.display = 'block';
+    var deleteMem = document.getElementsByClassName('delete-mem')[0];
+    if (emailFromPHP === creatorGroup) deleteMem.innerHTML = "Xóa khỏi nhóm";
+    else deleteMem.style.display = 'none';
+
+    let xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 || this.readyState == 200) {
+            let response = JSON.parse(this.response);
+            console.log(response);
+            let infomation = document.getElementsByClassName('infomation')[0];
+            infomation.innerHTML = '';
+            let div = document.createElement('div');
+            let p1 = document.createElement('p');
+            let p2 = document.createElement('p');
+            let p3 = document.createElement('p');
+
+            div.setAttribute('class', 'fullname')
+            div.innerHTML = response.fullname;
+            p1.innerHTML = response.email;
+            p2.innerHTML = response.name_organization;
+            p3.innerHTML = response.age;
+            infomation.appendChild(div);
+            infomation.appendChild(p1);
+            infomation.appendChild(p2);
+            infomation.appendChild(p3);
+
+
+
+
+        }
+    }
+    xhttp.open('POST', 'index.php', true);
+    xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    xhttp.send(`email=${email}&getInfoMember=${true}`);
+
+}
+
+function closeModalMember() {
+    var showMember = document.getElementsByClassName('showMember')[0];
+    var editHomework = document.getElementsByClassName('edit-homework')[0];
+    showMember.style.display = 'none';
+    editHomework.style.display = 'none';
+}
+
+function deleteMember() {
+
+    let xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 || this.readyState == 200) {
+
+            let response = JSON.parse(this.response);
+            if(response){
+                alert("Xóa thành viên thành công");
+                location.reload();
+            }
+            else{
+                alert("Xóa thành viên thất bại! đã có lỗi xảy ra");
+            }
+
+        }
+    }
+    xhttp.open('POST', 'index.php', true);
+    xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    xhttp.send(`email=${memmber}&idGroup=${idGroupFromPHP}&deleteMemmber=${true}`);
 
 }

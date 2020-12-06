@@ -107,5 +107,93 @@ class Group{
         return $result;
 
     }
+
+    public function deleteMemmber($memmber, $idGroup, $email){
+        require_once PATH_SYSTEM  . DS . 'config' . DS . 'config.php';
+
+        $conn = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
+
+        if(!$conn) die('kết nối thất bại');
+        $query = 'SELECT * FROM groups WHERE id = ? AND creator = ?';
+        $stmt = $conn->prepare($query);
+        $stmt->bind_param('ss', $idGroup, $email);
+        $stmt->execute();
+        $stmt->store_result();
+        $count = $stmt->num_rows();
+        if($count == 1){
+            $query1 = 'DELETE FROM result WHERE author = ?';
+            $query2 = 'DELETE FROM homework WHERE submiter = ?';
+            $query3 = 'DELETE FROM member WHERE email = ? AND id_group =? ';
+            $stmt = $conn->prepare($query1);
+            $stmt->bind_param('s', $memmber);
+            $stmt->execute();
+
+            $stmt = $conn->prepare($query2);
+            $stmt->bind_param('s', $memmber);
+            $stmt->execute();
+
+            $stmt = $conn->prepare($query3);
+            $stmt->bind_param('ss', $memmber, $idGroup);
+            $stmt->execute();
+
+            $stmt->close();
+            $conn->close();
+            return true;
+        }
+        $stmt->close();
+        $conn->close();
+        return false;
+    }
+    public function leaveGroup($idGroup, $email){
+        require_once PATH_SYSTEM  . DS . 'config' . DS . 'config.php';
+
+        $conn = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
+
+        if(!$conn) die('kết nối thất bại');
+        $query = 'SELECT * FROM member WHERE id_group = ? AND email = ?';
+        $stmt = $conn->prepare($query);
+        $stmt->bind_param('ss', $idGroup, $email);
+        $stmt->execute();
+        $stmt->store_result();
+        $count = $stmt->num_rows();
+        if($count == 1){
+            $query1 = 'DELETE FROM result WHERE author = ?';
+            $query2 = 'DELETE FROM homework WHERE submiter = ?';
+            $query3 = 'DELETE FROM member WHERE email = ? AND id_group =? ';
+            $stmt = $conn->prepare($query1);
+            $stmt->bind_param('s', $email);
+            $stmt->execute();
+
+            $stmt = $conn->prepare($query2);
+            $stmt->bind_param('s', $email);
+            $stmt->execute();
+
+            $stmt = $conn->prepare($query3);
+            $stmt->bind_param('ss', $email, $idGroup);
+            $stmt->execute();
+
+            $stmt->close();
+            $conn->close();
+            return true;
+        }
+        $stmt->close();
+        $conn->close();
+        return false;
+    }
+    public function joinGroup($idGroup, $email){
+        require_once PATH_SYSTEM  . DS . 'config' . DS . 'config.php';
+
+        $conn = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
+
+        if(!$conn) die('kết nối thất bại');
+        $query = 'INSERT INTO member VALUES(?, ?)';
+        $stmt = $conn->prepare($query);
+        $stmt->bind_param('ss', $email, $idGroup);
+        $result = $stmt->execute();
+        
+        $stmt->close();
+        $conn->close();
+        return $result;
+    }
 }
 ?>

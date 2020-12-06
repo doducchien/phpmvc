@@ -45,23 +45,6 @@ function submitHomework() {
 }
 
 
-
-function timeToString(timeNumber) {
-    var time = new Date(timeNumber);
-    var hours = time.getHours();
-    var mi = time.getMinutes();
-    var date = time.getDate();
-    var month = time.getMonth();
-    var year = time.getFullYear();
-
-    hours = hours < 10 ? '0' + hours : hours;
-    mi = mi < 10 ? '0' + mi : mi;
-    date = date < 10 ? '0' + date : date;
-    month = month < 10 ? '0' + month : month;
-
-    return hours + ":" + mi + " - " + date + "/" + month + "/" + year;
-}
-
 function initHomework1() {
 
     var xhttp = new XMLHttpRequest();
@@ -86,7 +69,8 @@ function initHomework1() {
     }
     xhttp.open('POST', `index.php`);
     xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-    xhttp.send(`idHomework=${idHomeworkPHP}&idGroup=${resultFromPHP.id_group}&getSubmitedHomework=${true}`)
+    xhttp.send(`idHomework=${idHomeworkPHP}&idGroup=${resultFromPHP.id_group}&getSubmitedHomework=${true}`);
+    getResult(idHomeworkPHP, emailFromPHP);
 }
 
 
@@ -98,7 +82,7 @@ function timeToString(timeNumber) {
     var hours = time.getHours();
     var mi = time.getMinutes();
     var date = time.getDate();
-    var month = time.getMonth();
+    var month = time.getMonth() + 1;
     var year = time.getFullYear();
 
     hours = hours < 10 ? '0' + hours : hours;
@@ -116,4 +100,24 @@ function scoreAndCmt() {
             alert("Phải điền đầy đủ điểm và nhận xét");
         }
     }
+}
+
+function getResult(id_ass, author){
+    let point = document.getElementById('point');
+    let cmt = document.getElementById('cmt');
+    let xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function(){
+            if(this.readyState === 4 || this.readyState === 200){
+                let response = JSON.parse(this.response);
+                // console.log(response)
+                if(response){
+                    point.value = response.point? response.point: '';
+                    cmt.value = response.comment? response.comment: '';
+                }
+                
+            }
+        }
+        xhttp.open('POST', 'index.php', true);
+        xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+        xhttp.send(`id_ass=${id_ass}&id_group=${resultFromPHP.id_group}&author=${author}&getResult=${true}`) 
 }

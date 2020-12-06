@@ -14,15 +14,25 @@
         
         <?php include ('header.php') ?>
         <form class='form-edit'>
-                    <h3>Chỉnh sửa BTVN</h3>
-                    <textarea spellCheck='false' id='edit-content' placeholder='Nhập nội dung BTVN mới...'></textarea>
-                    <input id='edit-date' type="date">
-                    <input id='edit-time' type="time">
-                    <div class='btn-edit'>
-                        <button onClick='closeEditHomework()' id='btn-huy' type='button'>Huỷ</button>
-                        <button onClick='confirmEditHomework()' id='btn-xn' type='button'>Xác nhận</button>
-                    </div>
-                </form>
+            <h3>Chỉnh sửa BTVN</h3>
+            <textarea spellCheck='false' id='edit-content' placeholder='Nhập nội dung BTVN mới...'></textarea>
+            <input id='edit-date' type="date">
+            <input id='edit-time' type="time">
+            <div class='btn-edit'>
+                <button onClick='closeEditHomework()' id='btn-huy' type='button'>Huỷ</button>
+                <button onClick='confirmEditHomework()' id='btn-xn' type='button'>Xác nhận</button>
+            </div>
+        </form>
+        <div class="showMember">
+            <div class='infomation'>
+              
+            </div>
+            
+            <div class='btn-member'>
+                <button onClick='closeModalMember()' class='close-mem'>Đóng</button>
+                <button onClick='deleteMember()' class='delete-mem'>Xóa khỏi nhóm</button>
+            </div>
+        </div>
         <div class="group-content">
             <div class="edit-homework">
                             
@@ -38,8 +48,9 @@
                 <div class='member-title'><img src="public/assets/icon/group/group.png"> <span>THÀNH VIÊN NHÓM</span></div>
                 <ul class="list-member">
                     <?php
+                        $idGroup = $result[0]['idGroup'];
                         foreach($result[1]['listMember'] as $value){
-                            echo("<li><img src='public/assets/icon/group/user.png'><span>$value</span></li>");
+                            echo("<li onClick='openModalMember(`$value`, `$idGroup`)'><img src='public/assets/icon/group/user.png'><span>$value</span></li>");
                         
                         }
                     

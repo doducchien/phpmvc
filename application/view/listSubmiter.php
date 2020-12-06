@@ -34,15 +34,14 @@ if(!isset($_SESSION['email'])){
         <div class='modal'></div>
         <div class="modal-form">
             <h3>Bài tập đã nộp</h3>
-            <ul class="list-submited">
-                <li>Nộp lần 1 lúc 09:09 - 20/11/2020</li>
-            </ul>
+            <ul class="list-submited"></ul>
             <form>
-                <input type="number" placeholder="Nhập điểm...">
-                <textarea type='text' placeholder='Nhập nhận xét...'></textarea>
+                <h3>Đánh giá kết quả</h3>
+                <input id='point' type="number" placeholder="Nhập điểm...">
+                <textarea id='cmt' type='text' placeholder='Nhập nhận xét...'></textarea>
                 <div>
                     <button type='button' onClick='closeModal()'>Đóng</button>
-                    <button class='xn-point-cmt' type='button'>Xác nhận</button>
+                    <button onClick='saveResult()' class='xn-point-cmt' type='button'>Xác nhận</button>
                 </div>
                 
             </form>
@@ -63,17 +62,6 @@ if(!isset($_SESSION['email'])){
                     <ul class="menu-submited"></ul>
                 </div>
 
-                
-                <!-- <div class='point'>
-                    <u>Điểm số:</u> 
-                    <input id='point' type="number" placeholder="Chưa được chấm điểm">
-                </div>
-                <div class='cmt'>
-                    <u>Nhập xét của giáo viên</u>
-                    <textarea id='cmt' placeholder="Chưa được nhận xét"></textarea>
-                </div>
-                
-                <button onClick = 'scoreAndCmt()' id='xn-point-cmt'>Lưu điểm số và nhận xét</button> -->
                 
             </div>
         </div>

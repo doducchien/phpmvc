@@ -133,3 +133,7 @@ tr, caption{
 .display-none{
     display: none;
 }
+
+td  img{
+    height: 24px;
+}

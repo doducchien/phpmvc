@@ -17,18 +17,22 @@ function init() {
 
                 let img1 = document.createElement('img');
                 let img2 = document.createElement('img');
+                let a = document.createElement('a');
 
+                a.setAttribute('href', `index.php?idGroup=${item.id}`)
                 img1.setAttribute('src', 'public/assets/icon/manageGroup/rename.png');
                 img1.setAttribute('onclick', `renameGroup('${item.id}')`);
 
-                img2.setAttribute('src', 'public/assets/icon/manageGroup/delete.png');
-                img2.setAttribute('onclick', `deleteGroup('${item.id}')`);
+                img2.setAttribute('src', 'public/assets/icon/manageGroup/goto.png');
+                // img2.setAttribute('onclick', `deleteGroup('${item.id}')`);
 
                 td1.appendChild(document.createTextNode(item.id));
                 td2.appendChild(document.createTextNode(item.nameGroup));
                 td3.appendChild(document.createTextNode(item.totalMember));
+
+                a.appendChild(img2);
                 td4.appendChild(img1);
-                td4.appendChild(img2);
+                td4.appendChild(a);
                 td4.setAttribute('class', 'action');
 
                 tr.appendChild(td1);
@@ -132,9 +136,5 @@ function renameGroup($id) {
         xhttp2.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
         xhttp2.send(`idGroup=${$id}&rename=${rename}&renameGroup=true`);
     }
-
-}
-
-function deleteGroup($id) {
 
 }

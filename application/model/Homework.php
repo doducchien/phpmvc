@@ -312,5 +312,107 @@ class Homework{
         $conn->close();
         return false;
     }
+    public function saveResult($id, $id_ass, $idGroup, $point, $comment, $author, $email){
+        require_once PATH_SYSTEM  . DS . 'config' . DS . 'config.php';
+
+        $conn = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
+
+        if(!$conn) die('kết nối thất bại');
+        $query = 'SELECT * FROM groups WHERE id = ? AND creator = ?';
+        $stmt = $conn->prepare($query);
+        $stmt->bind_param('ss', $idGroup, $email);
+        $stmt->execute();
+        $stmt->store_result();
+        $count = $stmt->num_rows();
+
+        if($count == 1){
+            $query = 'INSERT INTO result VALUES(?, ?, ?, ?, ?)';
+            $stmt = $conn->prepare($query);
+            $stmt->bind_param('ssiss', $id, $id_ass, $point, $comment, $author);
+            $result = $stmt->execute();
+            
+            $stmt->close();
+            $conn->close();
+            return $result;
+        }
+
+        $stmt->close();
+        $conn->close();
+        return false;
+    }
+    public function getResult($id_ass, $idGroup, $author, $email){
+        require_once PATH_SYSTEM  . DS . 'config' . DS . 'config.php';
+
+        $conn = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
+
+        if(!$conn) die('kết nối thất bại');
+        $query = 'SELECT * FROM member WHERE id_group = ? AND email = ?';
+        $stmt = $conn->prepare($query);
+        $stmt->bind_param('ss', $idGroup, $email);
+        $stmt->execute();
+        $stmt->store_result();
+        $count = $stmt->num_rows();
+        if($count == 1){
+            $data=[];
+            $query = 'SELECT * FROM result WHERE id_ass = ? AND author = ?';
+            $stmt = $conn->prepare($query);
+            $stmt->bind_param('ss', $id_ass, $author);
+            $stmt->execute();
+            $stmt->bind_result($id, $id_ass, $point, $comment, $author);
+            if($stmt->fetch()){
+                
+                $data['id'] = $id;
+                $data['id_ass'] = $id_ass;
+                $data['point'] = $point;
+                $data['comment'] = $comment;
+                $data['author'] = $author;
+                
+            }
+            $stmt->close();
+            $conn->close();
+            return $data;
+        }
+
+        $stmt->close();
+        $conn->close();
+        return false;
+    }
+    public function deleteHomework($id, $idGroup, $email){
+        require_once PATH_SYSTEM  . DS . 'config' . DS . 'config.php';
+
+        $conn = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
+
+        if(!$conn) die('kết nối thất bại');
+        $query = 'SELECT * FROM groups WHERE id = ? AND creator = ?';
+        $stmt = $conn->prepare($query);
+        $stmt->bind_param('ss', $idGroup, $email);
+        $stmt->execute();
+        $stmt->store_result();
+        $count = $stmt->num_rows();
+        if($count == 1){
+            $query1 = 'DELETE FROM result WHERE id_ass = ?';
+            $query2 = 'DELETE FROM homework WHERE id_ass = ?';
+            $query3 = 'DELETE FROM assignment WHERE id = ?';
+            $stmt = $conn->prepare($query1);
+            $stmt->bind_param('s', $id);
+            $stmt->execute();
+
+            $stmt = $conn->prepare($query2);
+            $stmt->bind_param('s', $id);
+            $stmt->execute();
+
+            $stmt = $conn->prepare($query3);
+            $stmt->bind_param('s', $id);
+            $stmt->execute();
+
+            $stmt->close();
+            $conn->close();
+            return true;
+        }
+        $stmt->close();
+        $conn->close();
+        return false;
+
+    }
 }
 ?>

@@ -105,5 +105,38 @@ class Homework_Controller extends Controller{
         
         return $modelObj->{$action}($idHomework, $idGroup, $this->email, $submiter);
     }
+
+    public function saveResult($id, $id_ass,$idGroup, $point, $comment, $author){
+        include_once PATH_APP . DS . 'model' . DS . $this->model . '.php';
+            
+        $model = $this->model;
+        $action = $this->action;
+
+        $modelObj = new $model();
+        
+        return $modelObj->{$action}($id, $id_ass, $idGroup, $point, $comment, $author, $this->email);
+    }
+
+    public function getResult($id_ass, $idGroup, $author){
+        include_once PATH_APP . DS . 'model' . DS . $this->model . '.php';
+            
+        $model = $this->model;
+        $action = $this->action;
+
+        $modelObj = new $model();
+        
+        return $modelObj->{$action}($id_ass, $idGroup, $author, $this->email);
+    }
+
+    public function deleteHomework($id, $idGroup){
+        include_once PATH_APP . DS . 'model' . DS . $this->model . '.php';
+            
+        $model = $this->model;
+        $action = $this->action;
+
+        $modelObj = new $model();
+        
+        return $modelObj->{$action}($id, $idGroup, $this->email);
+    }
 }
 ?>

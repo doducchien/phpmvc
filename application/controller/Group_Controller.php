@@ -24,5 +24,36 @@ class Group_Controller extends Controller{
         echo $content;
         // var_dump($result);
     }
+
+    public function deleteMemmber($memmber, $idGroup, $email){
+        include_once PATH_APP . DS . 'model' . DS . $this->model . '.php';
+            
+        $model = $this->model;
+        $action = $this->action;
+
+        $modelObj = new $model();
+        
+        return $modelObj->{$action}($memmber, $idGroup, $email);
+    }
+    public function leaveGroup($idGroup, $email){
+        include_once PATH_APP . DS . 'model' . DS . $this->model . '.php';
+            
+        $model = $this->model;
+        $action = $this->action;
+
+        $modelObj = new $model();
+        
+        return $modelObj->{$action}($idGroup, $email);
+    }
+    public function joinGroup($idGroup, $email){
+        include_once PATH_APP . DS . 'model' . DS . $this->model . '.php';
+            
+        $model = $this->model;
+        $action = $this->action;
+
+        $modelObj = new $model();
+        
+        return $modelObj->{$action}($idGroup, $email);
+    }
 }
 ?>

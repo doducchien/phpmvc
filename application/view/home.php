@@ -45,6 +45,9 @@ if(!isset($_SESSION['email'])){
             </div>
         </div>
     </div>
+    <script>
+        emailFromPHP = <?php echo json_encode($_SESSION['email'], JSON_HEX_TAG); ?>
+    </script>
     <script src="public/js/home.js"></script>
     <script src="public/js/listGroup.js"></script>
     <script src="public/js/header.js"></script>
