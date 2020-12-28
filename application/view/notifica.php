@@ -8,6 +8,6 @@
     <link rel="stylesheet" href="public/css/notifica.css">
 </head>
 <body>
-    
+    <img src="/public/assets/img/home/bk.jpg" alt="">
 </body>
 </html>

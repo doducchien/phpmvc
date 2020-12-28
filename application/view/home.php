@@ -39,6 +39,7 @@ if(!isset($_SESSION['email'])){
         <div class="home-content">
             <div class="notifica">
                 <?php include ("notifica.php")?>
+                
             </div>
             <div id='list-group' class="list-group">
                 <?php include ("listGroup.php") ?>

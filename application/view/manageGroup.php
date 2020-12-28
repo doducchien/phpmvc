@@ -45,6 +45,7 @@ if(!isset($_SESSION['email'])){
                     <h2>Tạo nhóm</h2>
                     <form>
                         <input require onkeyup="toggleBtnCreate()" id='idGroupCreate' name='idGroupCreate'  type="text" placeholder='Nhập id nhóm...' autocomplete="off">
+                        <input require onkeyup="toggleBtnCreate()" id='nameGroup' name='nameGroup'  type="text" placeholder='Nhập tên nhóm...' autocomplete="off">
                         <button id='createGroupBtn' onClick='createGroup()' type='button'>Xác nhận</button>
 
                         <div class="alert"></div>
